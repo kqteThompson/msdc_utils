@@ -13,7 +13,7 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map=device_map,
 )
 
-model = PeftModel.from_pretrained(model, "/tmpdir/thompson/parser_adapters", device_map=device_map)
+model = PeftModel.from_pretrained(model, "/tmpdir/thompson/parser_adapters_stac", device_map=device_map)
 model = model.merge_and_unload()
 
 tokenizer = AutoTokenizer.from_pretrained("/tmpdir/thompson/llama-2-13b-hf/", trust_remote_code=True)
@@ -22,8 +22,9 @@ tokenizer.padding_side = "right" # Fix weird overflow issue with fp16 training
 
 pipe = pipeline(task="text-generation", model=model, tokenizer=tokenizer, max_length=4096, do_sample=False)
 print("Padding side:",tokenizer.padding_side)
-val_dataset = load_dataset("json", data_files={'val':'/tmpdir/thompson/parser_data/parser_val_moves_15.jsonl'})["val"]  
-test_dataset = load_dataset("json", data_files={'test':'/tmpdir/thompson/parser_data/parser_test_moves_15.jsonl'})["test"]
+
+# val_dataset = load_dataset("json", data_files={'val':'/tmpdir/thompson/parser_data/parser_val_stacsquish_15.jsonl'})["train"]
+test_dataset = load_dataset("json", data_files={'test':'/tmpdir/thompson/parser_data/parser_test_stacsquish_15.jsonl'})["test"]
 
 # def formatting_prompts_func(example):
 #      output_texts = []
@@ -39,23 +40,23 @@ def formatting_prompts_func(example):
          output_texts.append(text)
      return output_texts
 
-val_texts = formatting_prompts_func(val_dataset)
+# val_texts = formatting_prompts_func(val_dataset)
 test_texts = formatting_prompts_func(test_dataset)
 #train_texts = formatting_prompts_func(train_dataset)
 
 #print("Train Length", len(train_texts))
-print("Val Length:", len(val_texts))
+# print("Val Length:", len(val_texts))
 print("Test Length:", len(test_texts))
 
-f = open("/tmpdir/thompson/parser_adapters/val-output-file.txt","w")
+# f = open("/tmpdir/thompson/parser_adapters/val-output-stac-ll2-file.txt","w")
 
-for text in tqdm(val_texts):
-    print(text)
-    print(pipe(text)[0]["generated_text"], file=f)
+# for text in tqdm(val_texts):
+#     print(text)
+#     print(pipe(text)[0]["generated_text"], file=f)
 
-f.close()
+# f.close()
 
-f = open("/tmpdir/thompson/parser_adapters/test-output-file.txt","w")
+f = open("/tmpdir/thompson/parser_adapters/test-output-stac-ll2-file.txt","w")
 
 for text in tqdm(test_texts):
     print(text)

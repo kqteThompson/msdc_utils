@@ -23,3 +23,16 @@ V1 - worldstate is just before the first instruction from narr arc, if there are
 narrative arc, the last moves are added just before. 
  
 V2 - worldstate is just before the most recent instruction from narr arc. 
+
+======FOR THE I-A-I plus worldstate data:
+
+1. Run text_to_iai.py to transform textfiles to json where each dialogue is a list of utterances and move/worldstate dicts:
+"dialogue": [
+            "<Builder> Mission has started.",
+            "<Architect> For this one, build two lines of three touching the ground with one block gap between them",
+            "<Architect> In blue",
+            {
+                "moves": "place blue 1 1 1\nplace blue 1 1 0\nplace blue 1 1 -1\nplace blue -1 1 1\nplace blue -1 1 -1\nplace blue -1 1 0",
+                "worldstate": "place blue 1 1 1, place blue 1 1 0, place blue 1 1 -1, place blue -1 1 1, place blue -1 1 -1, place blue -1 1 0"
+            },...]
+2. Run json_to_csv_iai.py to transform the json output from step one to the final training set 

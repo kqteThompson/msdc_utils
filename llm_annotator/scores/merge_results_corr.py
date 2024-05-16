@@ -1,50 +1,12 @@
-"""
-Opens output from llama parser and 
-
-
-TEST:
-total outputs:  5918
-total pred outputs:  6258
-Attachment F1: 0.8842032306590848 3134
-Attachment Average Precision: 0.8882752623800341
-Attachment Average Recall: 0.8871948470943366
---------------------------------
-Attachment + Rel F1: 0.8127302132468429 3134
-Attachment + Rel Average Precision: 0.81714855175109
-Attachment + Rel Average Recall: 0.8130485155134167
-
-"""
 import os
 import csv
-import jsonlines
 import numpy as np
 import pickle
-from collections import defaultdict
+from collections import defaultdict, Counter
+import pandas
+from sklearn.metrics import classification_report
 
-# def get_rels(sample_string, sample_index, attach=0):
-#     """
-#     takes a sample string and returns a list of tuples
-#     if attach = 1, then only return endpoints, no rel types
-#     """
-#     attach_list = [st.strip() for st in sample_string.split(' ')]
-#     if attach:
-#         new_list = []
-#         for a in attach_list:
-#             try:
-#                 s = a.split('(')[1].split(')')[0].split(',')
-#             except IndexError:
-#                 print('split error at ', sample_index)
-#             else:
-#                 try:
-#                     new_list.append((int(s[0]), int(s[1])))
-#                 except IndexError:
-#                     print('split error at ', sample_index)
-#                 except ValueError:
-#                     print('value error at ', sample_index)
-#         attach_list = new_list
-#     return attach_list
-
-def get_links(sample_string, sample_index, distance = None):
+def get_links(sample_string, sample_index):
     """
     takes a sample string and returns a list of attach tuples
     and a list of rel type strings
@@ -84,41 +46,30 @@ def get_links(sample_string, sample_index, distance = None):
     for i, r in enumerate(attach_list):
         full_list.append((rel_list[i], r[0], r[1]))   
     return attach_list, full_list
-
-global_path = '/home/kate/minecraft_utils/'
-current_folder=os.getcwd()
-
-# gold_path = global_path + 'llm_annotator/parser_val_moves_15.jsonl'
-# pred_path = global_path + '/calmip/val-output-file.txt'
-gold_path = global_path + 'llm_annotator/parser_test_moves_15.jsonl'
-pred_path = global_path + '/calmip/test-output-file.txt'
-
-csv_path = current_folder + '/compare.csv'
-
-pickle_save_path = current_folder + '/pickles/'
+    
 
 
-#get pred output list
-with open(pred_path, 'r') as txt:
-    text = txt.read().split('\n')
+data = pandas.read_csv("./compare.csv")
+gold_outputs = [data["Gold"][i] for i in range(len(data["Gold"]))]
+pred_outputs = [data["Pred"][i] for i in range(len(data["Pred"]))]
 
-pred_outputs = []
+gold_outputs[108] = 'ACK(24,25) CONTIN(25,26) COM(26,27) CONTIN(27,28) ELAB(29,30) CONTR(25,29) CORR(24,29)' ## There were 2 COM(26,27) originally
+gold_outputs[515] = 'RES(14,15) CORR(12,15)' ## There were 2 RES(14,15) originally
+gold_outputs[619] = 'CORR(53,55) CONTIN(55,56) CORR(54,55)' ## There were 2 CORR(53,55) originally
+gold_outputs[742] = 'ACK(32,33) ACK(30,34)' ## There were 2 ACK(30,34) originally
+gold_outputs[2005] = 'RES(5,6) NARR(1,6)' ## There were 2 RES(5,6) originally
 
-for t in text:
-    if '### DS:' in t:
-        sample = t.split('### DS:')[1].strip()
-        pred_outputs.append(sample)
 
-#get gold sample list
-gold_outputs = []
-
-with jsonlines.open(gold_path) as reader:
-    for obj in reader:
-        gold_outputs.append(obj['PS'])
-
-print(len(pred_outputs))
-print(len(gold_outputs))
-
+##Let's check there are no other repetitions in gold
+for i in range(len(gold_outputs)):
+    assert len(gold_outputs[i].split(" "))==len(np.unique(gold_outputs[i].split(" ")))
+    
+##Let's check there are no other repetitions in pred
+for i in range(len(pred_outputs)):
+    assert len(pred_outputs[i].split(" "))==len(np.unique(pred_outputs[i].split(" ")))
+    
+labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
+              'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ','NULL']
 csv_list = []
 
 att_f1_l = []
@@ -135,7 +86,7 @@ total_FP = []
 total_FN = []
 matrix_list = []
 tp_matrix_list = []
-
+g_label_l = []
 tp_distances = defaultdict(list)
 fp_distances = defaultdict(list)
 fn_distances = defaultdict(list)
@@ -161,8 +112,7 @@ for i, s in enumerate(pred_outputs):
     if prec+rec==0:
         att_f1_l.append(0)
     else:
-        att_f1_l.append(2*prec*rec/(prec+rec))
-    
+        att_f1_l.append(2*prec*rec/(prec+rec))    
     #then do attach + rel_types
     if len(gold_all) > 0 and len(pred_all) > 0:
         TP = [e for e in pred_all if e in gold_all]
@@ -175,22 +125,20 @@ for i, s in enumerate(pred_outputs):
     else:
         prec = 0
         rec = 0
-        TP=[]
-        FP=[]
-        FN=[]
+        TP = []
+        FP = []
+        FN = []
     type_prec_l.append(prec)
     type_rec_l.append(rec)
     if prec+rec==0:
         type_f1_l.append(0)
     else:
         type_f1_l.append(2*prec*rec/(prec+rec))
-
     #then process the TP, FP, FN for matrix 
     total_TP.extend(TP)
     total_FN.extend(FN)
     total_FP.extend(FP)
     mlen = len(matrix_list)
-
     for x in TP:
         matrix_list.append([x[0], x[0]])
         tp_matrix_list.append([x[0], x[0]])
@@ -213,26 +161,24 @@ for i, s in enumerate(pred_outputs):
                 break
         else:
             print('went to null!!')
-            matrix_list.append([x[0],'NULL'])
-          
+            matrix_list.append([x[0],'NULL'])          
         #add to distance dict
         d = x[2]-x[1]
         fn_distances[d].append(x[0])
-
-    for x in FP:
-        # matrix_list.append(['NULL', x[0]])
-        for z, y in enumerate(leftover_gold):
-            if x[1:] == y[1:]:
-                matrix_list.append([y[0], x[0]])
-                tp_matrix_list.append([y[0], x[0]])
-                leftover_gold.pop(z)
-                break
-        else:
-            matrix_list.append(['NULL', x[0]])
+    leftover_gold = [a for a in leftover_gold if a not in FN]
+    assert len(leftover_gold)==0
+    for x in leftover_pred:
+        matrix_list.append(['NULL', x[0]])
         #add to distance dict
         d = x[2]-x[1]
         fp_distances[d].append(x[0])
+    g_label = [g[0] for g in gold_all]
+    g_label_l.extend(g_label)
+    m_label = [m[0] for m in matrix_list]
     
+    for label in labels:
+        if label!="NULL":
+            assert Counter(g_label_l)[label]==Counter(m_label)[label]
     print(TP)
     print('false positive', FP)
     print('gold', gold_all)
@@ -242,39 +188,35 @@ for i, s in enumerate(pred_outputs):
     print('-------------------------')
 
 
-print('total gold outputs: ', len(total_gold))
-print('total pred outputs: ', len(total_preds))
-print('num TP: ', len(total_TP))
-print('num FN: ', len(total_FN))
-print('num FP: ', len(total_FP))
-print('len matrix list', len(matrix_list))
-print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l))
-print("Attachment Average Precision:",np.mean(att_prec_l))
-print("Attachment Average Recall:",np.mean(att_rec_l))
-print('--------------------------------')
-print("Attachment + Rel F1:",np.mean(type_f1_l),len(type_f1_l))
-print("Attachment + Rel Average Precision:",np.mean(type_prec_l))
-print("Attachment + Rel Average Recall:",np.mean(type_rec_l))
+gold_list = [labels.index(m[0]) for m in matrix_list]
+pred_list = [labels.index(m[1]) for m in matrix_list]
 
-# fields = ['Gold', 'Pred']
-# with open(csv_path, 'w') as f:
-#     write = csv.writer(f)
-#     write.writerow(fields)
-#     write.writerows(csv_list)
+print(classification_report(gold_list,pred_list,target_names=labels))
 
-# print('csv saved!')
+# The F1-scores for all the relations are correct. 
+#It's calculated the same way as N said. 
+#That is, while calculating F1 for label l, all the ["NULL", l] entries count towards false-positive for label l 
+#and all the [l, "NULL"] entries count towards false-negative for label l. 
+#So, the "NULL" type is affecting the precision/recall/F1 for label l (as it should). 
+#Now, for the overall weighted average precision/recall/f1-score, we want the average to be over the actual relation labels set (i.e. excluding "NULL" class). 
+#For that, we do this 
+d = classification_report(gold_list,pred_list,target_names=labels,output_dict=True)
+prec = 0
+rec = 0
+f1 = 0 
+count = 0
 
-with open(pickle_save_path + 'conf_mtx.pkl', 'wb') as f:  
-    pickle.dump(matrix_list, f)   
+for label in labels:
+    if label!="NULL":
+        prec+=d[label]["precision"]*d[label]["support"]
+        rec+=d[label]["recall"]*d[label]["support"]
+        f1+=d[label]["f1-score"]*d[label]["support"]
+        count+=d[label]["support"]
+        # checking that support is same as the number of ground truth instance for the label
+        assert d[label]["support"] == Counter(g_label_l)[label]
+        
 
-with open(pickle_save_path + 'conf_mtx_tp.pkl', 'wb') as f:  
-    pickle.dump(tp_matrix_list, f)    
 
-with open(pickle_save_path + 'tp_dict.pkl', 'wb') as f:  
-    pickle.dump(tp_distances, f)  
-
-with open(pickle_save_path + 'fp_dict.pkl', 'wb') as f:  
-    pickle.dump(fp_distances, f) 
-
-with open(pickle_save_path + 'fn_dict.pkl', 'wb') as f:  
-    pickle.dump(fn_distances, f) 
+print("Weighted Average Precision:", prec/count)
+print("Weighted Average Recall:", rec/count)
+print("Weighted Average F1 score:", f1/count)

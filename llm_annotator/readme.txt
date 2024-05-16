@@ -27,3 +27,9 @@ SAMPLE_PATTERN = defaultdict with keys: 'context','structure','turn', 'predict'
 
 DISTANCE == max number of edus in each window
 **currently an issue with 7
+
+
+
+###OUTPUT ANALYSIS
+
+Put
