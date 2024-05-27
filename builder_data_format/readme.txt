@@ -35,4 +35,32 @@ V2 - worldstate is just before the most recent instruction from narr arc.
                 "moves": "place blue 1 1 1\nplace blue 1 1 0\nplace blue 1 1 -1\nplace blue -1 1 1\nplace blue -1 1 -1\nplace blue -1 1 0",
                 "worldstate": "place blue 1 1 1, place blue 1 1 0, place blue 1 1 -1, place blue -1 1 1, place blue -1 1 -1, place blue -1 1 0"
             },...]
+            
 2. Run json_to_csv_iai.py to transform the json output from step one to the final training set 
+
+NB:
+
+2347 (TRAIN) samples out of 3722 : iai > narr, and 3084 iai >= narr
+Narr chunks
+Max context: 131
+Avg context len: 6.650188070929608
+Mode len: [(1, 1436)]
+IAI chunks
+Max context: 55
+Avg context len: 8.130037614185921
+Mode len: [(5, 472)]
+
+So instead we opted for shortening the narrative chunks that were longer than Narrative chunks:
+
+
+==============FOR reducing Narrative chunks 
+
+The original paper used I-A-I ---> A to get a score for the action prediction task 
+We tried the same prediction task using all of the previous context and got a 10 point boost. 
+Then we tried the prediction task using only the narration chunks as context, plus worldstate. we got a comparable score, 
+*which indicates that the contextual information provided by narrative chunks is sufficient for (a high score) on the action prediction task*
+This is interesting because the narrative chunks are much smaller on average than the I-A-I chunks. 
+
+But in order to show that the narration chunks + worldstate provide the necessary information, we have to show that giving less information 
+than narration chunks lowers the score on the prediction task. 
+So in cases where the narrative chunks are longer than the I-A-I chunks, we cut the narrative chunks down to I-A-I

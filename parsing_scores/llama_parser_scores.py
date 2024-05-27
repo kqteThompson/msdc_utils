@@ -14,13 +14,13 @@ def get_links(sample_string, sample_index):
     and a list of rel type strings
     """
     #MINECRAFT labels
-    # labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
-    #           'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ']
+    labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
+              'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ']
     
     #STAC labels
-    labels = ['COM', 'CONT', 'CORR', 'QAP', 'PAR', 'ACK',
-            'ELAB', 'CLARIFQ', 'COND', 'CONT', 'RES', 'EXPL',
-            'QELAB', 'ALT', 'NARR', 'BACK', 'SEQ']
+    # labels = ['COM', 'CONT', 'CORR', 'QAP', 'PAR', 'ACK',
+    #         'ELAB', 'CLARIFQ', 'COND', 'CONT', 'RES', 'EXPL',
+    #         'QELAB', 'ALT', 'NARR', 'BACK', 'SEQ']
     
     
     split_list = [st.strip() for st in sample_string.split(' ')]
@@ -45,10 +45,9 @@ def get_links(sample_string, sample_index):
             if r in labels:
                 #make sure the label is well-formed 
                 rel = r
-        # if rel != None and s_tuple != None:
-        #     attach_list.append((int(s[0]), int(s[1])))
-        #     rel_list.append(r)
+    
         if rel != None and s_tuple != None and (s_tuple[1] - s_tuple[0]) <= 10:
+        # if rel != None and s_tuple != None:
             attach_list.append((int(s[0]), int(s[1])))
             rel_list.append(r)
     
@@ -72,12 +71,13 @@ def get_links(sample_string, sample_index):
 current_folder=os.getcwd()
 
 
-# gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
+gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
+pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
 # pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
 
 
-gold_path = current_folder + '/stac_llama/parser_test_stacsquish_15.jsonl'
-pred_path = current_folder + '/stac_llama/test-output-stac-ll2-file.txt'
+# gold_path = current_folder + '/stac_llama/parser_test_stacsquish_15.jsonl'
+# pred_path = current_folder + '/stac_llama/test-output-stac-ll2-file.txt'
 
 #get pred output list
 with open(pred_path, 'r') as txt:
@@ -237,7 +237,7 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/scores_llama2_stacsquish.txt","w")
+f = open(current_folder + "/new_outputs/scores_llama3_gold_msdc_10.txt","w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)

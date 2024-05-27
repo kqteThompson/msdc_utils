@@ -61,6 +61,10 @@ with open(train_data, 'r') as jf:
                     else:
                         utterance_block.append(line)
             narr_splits.append(single_narr)
+    
+    # for s in narr_splits:
+    #     print(s)
+    #     print('---------')
             
 
             #now narr_splits is a list of lists, each a set of moves that comprises one narrative arc
@@ -70,47 +74,79 @@ with open(train_data, 'r') as jf:
             last_world_state = 'EMPTY'
 
             for split in narr_splits:
-                print(split)
-                print('----------------')
-                
-                dial_with_actions = []
-                dial_with_actions.append(last_world_state)
-
-                dial_with_actions.extend(split[0])
-                 # print('head: ', head)
-                dial_string = '\n'.join(dial_with_actions)
-                last_move = split[1]['moves']
-                last_world_state = split[1]['worldstate']
-
-                csv_list.append([dial_string, last_move])
-                r += 1
-
+                # print(split)
+                # print('----------------')
+            
                 all_actions = len([c for c in split if isinstance(c, dict)]) #to compare with num moves after
-                if all_actions > 1:
-                    #continue with a window
+                dial_with_actions = []
+                
+                #if one action
+                if all_actions == 1:
+                    dial_with_actions.append(last_world_state)
+                    dial_with_actions.extend(split[0])
+                    dial_string = '\n'.join(dial_with_actions)
+                    last_move = split[1]['moves']
+                    csv_list.append([dial_string, last_move])
+                    r += 1
+                    last_world_state = split[1]['worldstate']
+                #if two actions
+                elif all_actions == 2:
+                    dial_with_actions.append(last_world_state)
+                    dial_with_actions.extend(split[0])
+                    dial_string = '\n'.join(dial_with_actions)
+                    last_move = split[1]['moves']
+                    csv_list.append([dial_string, last_move])
+                    r += 1
+                    last_world_state = split[1]['worldstate']
+                    #then do second one
+                    dial_with_actions.append(last_move)
+                    dial_with_actions.extend(split[2])
+                    dial_string = '\n'.join(dial_with_actions)
+                    last_move = split[3]['moves']
+                    csv_list.append([dial_string, last_move])
+                    r += 1
+                    last_world_state = split[3]['worldstate']
+                else: #if more than two
                     sub_start = 0
-                    for samp in range(all_actions-1):
+                    dial_with_actions.append(last_world_state)
+                    dial_with_actions.extend(split[sub_start])
+                    dial_string = '\n'.join(dial_with_actions)
+                    last_move = split[sub_start + 1]['moves']
+                    csv_list.append([dial_string, last_move])
+                    r += 1
+                    last_world_state = last_move
+                    #then do second one
+                    dial_with_actions.append(last_move)
+                    dial_with_actions.extend(split[sub_start + 2])
+                    dial_string = '\n'.join(dial_with_actions)
+                    last_move = split[sub_start + 3]['moves']
+                    csv_list.append([dial_string, last_move])
+                    r += 1
+                    #move window
+                    for act in range(all_actions-2):
+                        sub_start += 2
                         dial_with_actions = []
                         dial_with_actions.append(last_world_state)
                         dial_with_actions.extend(split[sub_start])
-                        dial_with_actions.append(split[sub_start + 1]['moves'])
+                        last_move = split[sub_start + 1]['moves']
+                        dial_with_actions.append(last_move)
+                        last_world_state = split[sub_start + 1]['worldstate']
+                        #then do second one
                         dial_with_actions.extend(split[sub_start + 2])
-                        # print('head: ', head)
                         dial_string = '\n'.join(dial_with_actions)
                         last_move = split[sub_start + 3]['moves']
-                        last_world_state = split[sub_start + 3]['worldstate']
-
                         csv_list.append([dial_string, last_move])
                         r += 1
-                        sub_start += 2
+                    last_world_state = split[sub_start + 3]['worldstate']
 
+                   
             if r != original_moves:
                 print('not the same ## of moves! {} in original, {} in csv'.format(original_moves, r))
 
 
 print('all games done, {} samples, creating csv...'.format(len(csv_list)))
 fields = ['dial_with_actions', 'action_seq']
-with open(current_folder + '/actseq-test-narr-worldstate_attenuated.csv', 'w') as f:
+with open(current_folder + '/actseq-test-narr-worldstate_attenuated_newtest.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(fields)
     write.writerows(csv_list)
@@ -118,16 +154,6 @@ with open(current_folder + '/actseq-test-narr-worldstate_attenuated.csv', 'w') a
 print('csv saved.')
 
 
-
-
-
-# print('done')
-# for item in csv_list:
-#     print(item[0])
-#     print('~~~~')
-#     print(item[1])
-#     # print('{} :: {}').format(item[0], item[1])
-#     print('--------------------------------------')
                
             
 
