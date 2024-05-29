@@ -30,6 +30,19 @@ DISTANCE == max number of edus in each window
 
 
 
-###OUTPUT ANALYSIS
+###FOR THE STAC CORPORA
 
-Put
+NB: the ids in these corpora were not unique, so I gave them unique ids and saved them 
+in the 'corrected' versions of the folders (id_check.py counts these)
+NB: we artificially split TRAIN into val and train:
+STAC SQUISHED:
+train: 931 val: 90 test: 112
+STAC LINGUISTIC:
+train: 986 val: 100 test: 111
+
+First run format_stac.py to then foramt_jsonl_stac.py to get the jsonl docs for training.
+
+Sometimes there are empty PS fields, either because the newest candidate is connected to the 
+structure via a backwards relation, or because the relation exceeds 15.
+
+In order to remove these from the training jsonl, run remove_empty_ps.py

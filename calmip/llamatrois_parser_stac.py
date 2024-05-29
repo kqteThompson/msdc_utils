@@ -10,7 +10,7 @@ from transformers import (
     TrainingArguments,
     pipeline,
     logging,
-    EarlyStoppingCallback,
+    # EarlyStoppingCallback,
 )
 from peft import LoraConfig, PeftModel
 from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
@@ -61,7 +61,7 @@ output_dir = "./results"
 
 # Number of training epochs
 #num_train_epochs = 1
-num_train_epochs = 3
+num_train_epochs = 4
 
 # Enable fp16/bf16 training (set bf16 to True with an A100)
 fp16 = False
@@ -126,7 +126,7 @@ packing = False
 device_map = "auto"
 # Load dataset (you can process it here)
 # The instruction dataset to use
-dataset = load_dataset("json", data_files={'train':'/tmpdir/thompson/parser_data/parser_train_stacsquish_15.jsonl'})["train"]
+dataset = load_dataset("json", data_files={'train':'/tmpdir/thompson/parser_data/parser_stac_train_15.jsonl'})["train"]
 #val_dataset = load_dataset("json", data_files={'val':'/tmpdir/thompson/parser_data/parser_val_stacsquish_15.jsonl'})["val"]
 
 #dataset = dataset.select(range(300))

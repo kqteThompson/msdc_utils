@@ -116,9 +116,13 @@ def format_sample(ddict):
 
 current_folder=os.getcwd()
 
-data_path = current_folder + '/stac_train_turns.json'
-annotation_path = current_folder + '/stac/stac_squished_data/train_data.json'
-save_path = current_folder + '/parser_train_stacsquish_15.jsonl'
+# data_path = current_folder + '/stac_test_turns.json'
+# annotation_path = current_folder + '/stac/stac_squished_corrected/test_data.json'
+# save_path = current_folder + '/parser_stac_test_15.jsonl'
+
+data_path = current_folder + '/stac_linguistic_train_turns.json'
+annotation_path = current_folder + '/stac/stac_linguistic_corrected/train_data.json'
+save_path = current_folder + '/parser_stac_linguistic_train_15.jsonl'
 
 with open(data_path, 'r') as j:
     jfile = json.load(j)
@@ -127,7 +131,7 @@ with open(data_path, 'r') as j:
 with open(annotation_path, 'r') as j:
     jfile = json.load(j)
     annotations = jfile
-    annotations = annotations[90:]
+    annotations = annotations
 
 
 json_l = []
@@ -135,6 +139,7 @@ json_l = []
 DISTANCE = 15
 game_count = 0
 for game in games:
+# for game in [g for g in games if g['id'] == 's1-league1-game5stac_1368694440']:
     game_id = game['id']
     print(game_id)
     game_count += 1

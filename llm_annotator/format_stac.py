@@ -28,19 +28,22 @@ import json
 
 current_folder=os.getcwd()
 
-data_path = current_folder + '/stac/stac_squished_data/train_data.json'
-save_path = current_folder + '/stac_val_turns.json'
+# data_path = current_folder + '/stac/stac_squished_corrected/train_data.json'
+# save_path = current_folder + '/stac_train_turns.json'
+
+data_path = current_folder + '/stac/stac_linguistic_corrected/test_data.json'
+save_path = current_folder + '/stac_linguistic_test_turns.json'
 
 with open(data_path, 'r') as j:
     jfile = json.load(j)
     games = jfile
 
-##for each game, find turns, edus.
+##for each game, find turns, edus.s
 ##feed one turn at a t9ime, with each edu numbered, plus structure for that turn
 ##TEXT:   ##STRUCTURE:  ##NEXT TURN   => #output structure
 turn_version = []
 print('total games: {} '.format(len(games)))
-for game in games[:90]: #train/val split
+for game in games: #train/val split
     new_game = {}
     new_game['id'] = game['id']
     game_turns = []
