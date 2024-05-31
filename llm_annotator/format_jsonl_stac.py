@@ -34,7 +34,7 @@ from collections import defaultdict
 
 map_rels_str = {'Comment':'COM', 'Contrast':'CONTR', 'Correction':'CORR', 'Question-answer_pair':'QAP', 'Acknowledgement':'ACK','Elaboration':'ELAB',
                  'Clarification_question':'CLARIFQ', 'Conditional':'COND', 'Continuation':'CONTIN', 'Result':'RES', 'Explanation':'EXPL', 'Q-Elab':'QELAB',
-                 'Alternation':'ALT', 'Narration':'NARR', 'Background':'BACK', 'Parallel':'PAR', 'Sequence':'SEQ'}
+                 'Alternation':'ALT', 'Narration':'NARR', 'Background':'BACK', 'Parallel':'PAR', 'Sequence':'SEQ', 'Question_answer_pair':'QAP',  'Q_Elab':'QELAB'}
 
 
 
@@ -120,9 +120,13 @@ current_folder=os.getcwd()
 # annotation_path = current_folder + '/stac/stac_squished_corrected/test_data.json'
 # save_path = current_folder + '/parser_stac_test_15.jsonl'
 
-data_path = current_folder + '/stac_linguistic_train_turns.json'
-annotation_path = current_folder + '/stac/stac_linguistic_corrected/train_data.json'
-save_path = current_folder + '/parser_stac_linguistic_train_15.jsonl'
+data_path = current_folder + '/stac_linguistic_test_turns.json'
+annotation_path = current_folder + '/stac/stac_linguistic_corrected/test_data.json'
+save_path = current_folder + '/parser_stac_linguistic_test_15.jsonl'
+
+# data_path = current_folder + '/molweni_test_turns.json'
+# annotation_path = current_folder + '/molweni/molweni_clean_test50.json'
+# save_path = current_folder + '/parser_molweni_test_15.jsonl'
 
 with open(data_path, 'r') as j:
     jfile = json.load(j)
