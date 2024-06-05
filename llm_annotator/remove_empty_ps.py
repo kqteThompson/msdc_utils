@@ -8,8 +8,8 @@ This is just to remove empty PS's for training
 
 # current_folder=os.getcwd()
 
-# data_path = current_folder + '/parser_stac_linguistic_test_15.jsonl'
-# save_path = current_folder + '/parser_stac_linguistic_test_15_checked.jsonl'
+# data_path = current_folder + '/parser_stac_linguistic_flat_train_15.jsonl'
+# save_path = current_folder + '/parser_stac_linguistic_flat_train_15_checked.jsonl'
 
 # checked_data = []
 
@@ -46,7 +46,7 @@ def is_first_moves(sample):
 
 current_folder=os.getcwd()
 
-data_path = current_folder + '/parser_stac_linguistic_test_15_checked.jsonl'
+data_path = current_folder + '/parser_stac_linguistic_flat_test_15_checked.jsonl'
 
 head_count = 0
 heads = []

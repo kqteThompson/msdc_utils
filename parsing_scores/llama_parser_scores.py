@@ -18,11 +18,9 @@ def get_links(sample_string, sample_index):
     #           'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ']
     
     #STAC labels
-    labels = ['COM', 'CONT', 'CORR', 'QAP', 'PAR', 'ACK',
-            'ELAB', 'CLARIFQ', 'COND', 'CONT', 'RES', 'EXPL',
-            'QELAB', 'ALT', 'NARR', 'BACK', 'SEQ']
-    
-    
+    labels = ['COM', 'CONTR', 'CORR', 'QAP', 'ACK', 'ELAB', 'CLARIFQ', 'COND', 'CONTIN', 'RES', 'EXPL', 
+                'QELAB','ALT', 'NARR', 'BACK', 'PAR', 'SEQ']
+
     split_list = [st.strip() for st in sample_string.split(' ')]
    
     rel_list = []
@@ -62,7 +60,6 @@ def get_links(sample_string, sample_index):
             full_list.append((rel_list[i], r[0], r[1]))   
     return endpoints, full_list
     
-
 #MINECRAFT LABELS
 # labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
 #               'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ','NULL']
@@ -72,14 +69,20 @@ current_folder=os.getcwd()
 
 
 # gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
-# pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
+# # pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
 # pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
 
-gold_path = current_folder + '/stac_llama/parser_stac_linguistic_test_15_checked.jsonl'
-pred_path = current_folder + '/stac_llama/stac_linguistic/test-output-generate-file-llama3-stac_ling.txt'
+# gold_path = current_folder + '/stac_llama/parser_stac_linguistic_test_15_checked.jsonl'
+# pred_path = current_folder + '/stac_llama/stac_linguistic/test-output-generate-file-llama3-stac_ling.txt'
 
-# gold_path = current_folder + '/molweni/parser_molweni_test_15.jsonl'
-# pred_path = current_folder + '/molweni/test-output-generate-file-llama3-molweni_ling.txt'
+gold_path = current_folder + '/molweni/parser_molweni_test_15.jsonl'
+pred_path = current_folder + '/molweni/test-output-generate-file-llama3-molweni_ling_flat.txt'
+
+# gold_path = current_folder + '/stac_llama/parser_stac_linguistic_flat_test_15_checked.jsonl'
+# pred_path = current_folder + '/stac_llama/stac_flat/test-output-generate-file-llama3-stac_ling_flat.txt'
+
+# gold_path = current_folder + '/stac_llama/parser_stac_test_15.jsonl'
+# pred_path = current_folder + '/stac_llama/stac_squished/test-output-generate-file-llama3-stac.txt'
 
 #get pred output list
 with open(pred_path, 'r') as txt:
@@ -121,28 +124,29 @@ tp_distances = defaultdict(list)
 fp_distances = defaultdict(list)
 fn_distances = defaultdict(list)
 
-# doubles = 0
+doubles = 0
 for i, s in enumerate(pred_outputs):
     #first do attachments
     pred_att, pred_all = get_links(s, i)
     gold_att, gold_all = get_links(gold_outputs[i], i)
 
-#     if len(set(gold_att)) < len(gold_att):
-#         print('!! multiple relations')
-#         doubles += len(gold_att) - len(set(gold_att))
-# print("double rels: ", doubles)
+    # print("GOLD:", gold_all)
+    # print("PRED:", pred_all)
+    # print('-------')
+
+    # if len(set(gold_att)) < len(gold_att):
+    #     print('!! multiple relations')
+    #     doubles += len(gold_att) - len(set(gold_att))
+    #     print("double rels: ", doubles)
 
     # calculate number of nulls there should be
     common = len(set(pred_att).intersection(set(gold_att)))
     expected_nulls = (len(pred_att) - common) + (len(gold_att) - common)
-    # print(len(gold_att))
-    # print(len(pred_att))
-    # print(common)
-    # print(expected_nulls)
-    # print(gold_att)
-    # print(pred_att)
+    # save all predictions in a list
     total_preds.extend(pred_all)
     total_gold.extend(gold_all)
+
+    #calculate the precision, recall, and f1 for the sample
     if len(gold_att) > 0 and len(pred_att) > 0:
         prec = len([e for e in pred_att if e in gold_att])/len(pred_att)
         rec = len([e for e in pred_att if e in gold_att])/len(gold_att)
@@ -159,8 +163,7 @@ for i, s in enumerate(pred_outputs):
     else:
         att_f1_l.append(2*prec*rec/(prec+rec))    
 
-
-    #then do attach + rel_types
+    #calculate the precision, recall, and f1 for the sample
     if len(gold_all) > 0 and len(pred_all) > 0:
         prec = len([e for e in pred_all if e in gold_all])/len(pred_all)
         rec = len([e for e in pred_all if e in gold_all])/len(gold_all)   
@@ -174,6 +177,7 @@ for i, s in enumerate(pred_outputs):
     else:
         type_f1_l.append(2*prec*rec/(prec+rec))
 
+    #create the relation comparisons by type
     TP = [e for e in pred_all if e in gold_all] 
     leftover_pred = [p for p in pred_all if p not in TP]
     leftover_gold = [p for p in gold_all if p not in TP]
@@ -217,14 +221,15 @@ for i, s in enumerate(pred_outputs):
     assert null_count == expected_nulls
 
 #compute labels in gold and pred
-#NB: might be different to the full list
+#NB: might be different to the full list, if there were doubles
 gold = [m[0] for m in matrix_list]
 pred = [m[1] for m in matrix_list]
-# print(gold)
-# print(pred)
+# print(set(gold))
+# print(set(pred))
 gold.extend(pred)
 labels = list(set(gold))
 print(labels)
+
 
 # labels = ['COM', 'CONT', 'CORR', 'QAP', 'PAR', 'ACK',
 #             'ELAB', 'CLARIFQ', 'COND', 'CONT', 'RES', 'EXPL',
@@ -239,7 +244,7 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/new_outputs/scores_llama3_stacling_gen.txt","w")
+f = open(current_folder + "/outputs_june/scores_llama3_molweni_flat_10.txt","w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)
@@ -281,5 +286,5 @@ print("Weighted Average Recall:", rec/count, file=f)
 print("Weighted Average F1 score:", f1/count, file=f)
 
 f.close()
-       
+    
         

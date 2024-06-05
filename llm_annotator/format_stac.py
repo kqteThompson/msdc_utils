@@ -28,8 +28,11 @@ import json
 
 current_folder=os.getcwd()
 
-data_path = current_folder + '/stac/stac_linguistic_corrected/test_data.json'
-save_path = current_folder + '/stac_linguistic_test_turns.json'
+data_path = '/home/kate/minecraft_utils/stac_linguistic/stac_linguistic_flat_test.json'
+save_path = current_folder + '/stac_linguistic_flat_test_turns.json'
+
+#data_path = current_folder + '/stac/stac_linguistic_corrected/test_data.json'
+#save_path = current_folder + '/stac_linguistic_test_turns.json'
 
 # data_path = current_folder + '/molweni/molweni_clean_test50.json'
 # save_path = current_folder + '/molweni_test_turns.json'
@@ -48,7 +51,8 @@ for game in games: #train/val split
     if len(game['edus']) > 1:
         new_game = {}
         total_games += 1
-        new_game['id'] = game['id']
+        # new_game['id'] = game['id']
+        new_game['id'] = game['dialogue_id']
         game_turns = []
         edus = game['edus'] 
         turn_no = 0

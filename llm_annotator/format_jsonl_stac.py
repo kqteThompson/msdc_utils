@@ -120,9 +120,10 @@ current_folder=os.getcwd()
 # annotation_path = current_folder + '/stac/stac_squished_corrected/test_data.json'
 # save_path = current_folder + '/parser_stac_test_15.jsonl'
 
-data_path = current_folder + '/stac_linguistic_test_turns.json'
-annotation_path = current_folder + '/stac/stac_linguistic_corrected/test_data.json'
-save_path = current_folder + '/parser_stac_linguistic_test_15.jsonl'
+data_path = current_folder + '/stac_linguistic_flat_test_turns.json'
+# annotation_path = current_folder + '/stac/stac_linguistic_corrected/test_data.json'
+annotation_path = '/home/kate/minecraft_utils/stac_linguistic/stac_linguistic_flat_test.json'
+save_path = current_folder + '/parser_stac_linguistic_flat_test_15.jsonl'
 
 # data_path = current_folder + '/molweni_test_turns.json'
 # annotation_path = current_folder + '/molweni/molweni_clean_test50.json'
@@ -148,7 +149,8 @@ for game in games:
     print(game_id)
     game_count += 1
     game = preprocess_edus(game) #preprocess game edus
-    rels = [dial['relations'] for dial in annotations if dial['id'] == game_id][0] #get relations
+    # rels = [dial['relations'] for dial in annotations if dial['id'] == game_id][0] #get relations
+    rels = [dial['relations'] for dial in annotations if dial['dialogue_id'] == game_id][0] #get relations flat stac
     s = defaultdict(list,{ k:[] for k in ('context','structure','turn', 'predict') }) #sample pattern
     s['context'].append(game['turns'][0]['edus']) #add first turn (append so that we can easily remove turns)
     #don't add relations for the first turn\

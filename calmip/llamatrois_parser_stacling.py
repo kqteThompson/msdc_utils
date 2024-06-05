@@ -21,7 +21,7 @@ from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
 model_name = "Meta-Llama-3-8B"
 
 # Fine-tuned model name
-new_model = "/tmpdir/thompson/llama-trois-local"
+new_model = "/tmpdir/thompson/llama-trois-parser_stacling_flat"
 
 ################################################################################
 # QLoRA parameters
@@ -60,8 +60,8 @@ use_nested_quant = False
 output_dir = "./results"
 
 # Number of training epochs
-num_train_epochs = 1
-#num_train_epochs = 3
+#num_train_epochs = 1
+num_train_epochs = 3
 
 # Enable fp16/bf16 training (set bf16 to True with an A100)
 fp16 = False
@@ -69,7 +69,6 @@ bf16 = False
 
 # Batch size per GPU for training
 per_device_train_batch_size = 1
-#per_device_train_batch_size = 5
 
 # Batch size per GPU for evaluation
 per_device_eval_batch_size = 2
@@ -116,8 +115,7 @@ logging_steps = 25
 ################################################################################
 
 # Maximum sequence length to use
-max_seq_length = 710
-#max_seq_length = 4096
+max_seq_length = 4096
 # max_new_tokens = 100 
 
 # Pack multiple short examples in the same input sequence to increase efficiency
@@ -128,7 +126,7 @@ packing = False
 device_map = "auto"
 # Load dataset (you can process it here)
 # The instruction dataset to use
-dataset = load_dataset("json", data_files={'train':'/tmpdir/thompson/parser_data/local_model_train.jsonl'})["train"]
+dataset = load_dataset("json", data_files={'train':'/tmpdir/thompson/parser_data/parser_stac_linguistic_flat_train_15_checked.jsonl'})["train"]
 #val_dataset = load_dataset("json", data_files={'val':'/tmpdir/thompson/parser_data/parser_val_stacsquish_15.jsonl'})["val"]
 
 #dataset = dataset.select(range(300))
@@ -179,12 +177,12 @@ print("Model lm_head shape:",model.lm_head.weight.shape)
 def formatting_prompts_func(example):
      output_texts = []
      for i in range(len(example['sample'])):
-         text = f"<|begin_of_text|>Identify the discourse relation (DR) between the following EDUs :\n {example['sample'][i]}\n ### DR: {example['PS'][i]}<|end_of_text|>"
+         text = f"<|begin_of_text|>Identify the discourse structure (DS) for the new turn in the following excerpt :\n {example['sample'][i]}\n ### DS: {example['PS'][i]}<|end_of_text|>"
          output_texts.append(text)
      return output_texts
 #response_template = "\n ### Answer:"
 #collator = DataCollatorForCompletionOnlyLM(response_template, tokenizer=tokenizer)
-response_template_with_context = "\n ### DR:"  # We added context here: "\n". This is enough for this tokenizer
+response_template_with_context = "\n ### DS:"  # We added context here: "\n". This is enough for this tokenizer
 response_template_ids = tokenizer.encode(response_template_with_context, add_special_tokens=False)[2:] 
 collator = DataCollatorForCompletionOnlyLM(response_template_ids, tokenizer=tokenizer)
 
@@ -252,7 +250,9 @@ trainer.model.save_pretrained(new_model)
 logging.set_verbosity(logging.CRITICAL)
 
 # Run text generation pipeline with our next model
-prompt = "<|begin_of_text|>Identify the discourse relation (DR) between the following EDUs :\n 0 <Buil> Mission has started .\n1 <Arch> alright ,\n ### DR:"
+prompt = "<|begin_of_text|>Identify the discourse structure (DS) for the new turn in the following excerpt:\n Context: 0 <Tomm> ello\n1 <Tomm> Just got a connection reset\n2 <Markus> Hm, shouldn't happen\n3 <Markus> (and hasn't before).\n4 <Markus> Let me know if you have problems.\n5 <Tomm> Got a SocketException error appear in this chat line\n6 <Tomm> I guess we'll see if it happens again\nStructure: CONTIN(0,1) EXPL(1,2) BACK(2,3) CONTIN(2,4) QAP(4,5) COM(5,6)\nNew Turn: 7 <Markus> Yes,\n8 <Markus> fingers crossed.\n ### DS:"
+#prompt = "<|begin_of_text|>Identify the discourse structure (DS) for the new turn in the following excerpt:\n Context: 0 <Server> It's Tyrant Lord's turn to roll the dice.\n1 <Server> Tyrant Lord rolled a 2 and a 4.\n2 <Server> nelsen gets 1 wood. sparkles gets 1 ore. Tyrant Lord gets 1 wood.\n3 <UI> nelsen has 7 resources. Kersti has 3 resources. sparkles has 3 resources. Tyrant Lord has 6 resources.\nStructure: RES(0,1) RES(1,2) RES(2,3)\nNew Turn: 4 <Tyrant> my wood or wheat for caly or ore anyone? \n ### DS:"
+#prompt = "<|begin_of_text|>Identify the discourse structure (DS) for the new turn in the following excerpt:\n Context: 0 <Buil> Mission has started .\n1 <Arch> alright ,\n2 <Arch> start with a row of 5 orange ones on the ground\n3 <Arch> any direction\n4 <Arch> near the center preferably\nStructure: ACK(0,1) CONTIN(0,2) ELAB(2,3) ELAB(3,4)\nNew Turn: 5 <Buil> I was just about to ask \n ### DS:"
 pipe = pipeline(task="text-generation", model=model, tokenizer=tokenizer, max_length=200)
 result = pipe(f"{prompt}")
 print(result[0]['generated_text'])
@@ -283,7 +283,7 @@ print("Device:",model.hf_device_map)
 print("Pad token:", (model.config.pad_token_id, tokenizer.pad_token_id))
 
 # output_merged_dir = "/tmpdir/thompson/llama-2-13b-parser"
-output_merged_dir = "/tmpdir/thompson/llama-trois-local"
+output_merged_dir = "/tmpdir/thompson/llama-trois-parser_stacling_flat"
 os.makedirs(output_merged_dir, exist_ok=True)
 model.save_pretrained(output_merged_dir, safe_serialization=True)
 
