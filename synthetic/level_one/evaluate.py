@@ -11,26 +11,37 @@ import json
 
 current_folder=os.getcwd()
 
-json_path = current_folder + '/llama_synth_function_output.json'
-save_path = current_folder + '/llama_synth_level_one_output.csv'
+#Nebula
+# json_path = current_folder + '/llama_synth_function_output.json'
+# save_path = current_folder + '/llama_synth_level_one_output.csv'
+
+#Nebula + finetuning
+# json_path = current_folder + '/llama_aug_synth_function_output.json'
+# save_path = current_folder + '/llama_aug_synth_level_one_output_for_analysis.csv'
+
+#Nebula + finetuning #2
+json_path = current_folder + '/llama_aug_synth_function_output_v2.json'
+save_path = current_folder + '/llama_aug_synth_level_one_output_for_analysis_v2.csv'
 
 
 with open(json_path, 'r') as j:
     jfile = json.load(j)
     samples = jfile
 
-headers = ['Shape', 'Color','Shape_corr', 'Size_corr', 'Loc_corr', 'Orient_corr', 'Full_struct_corr']
+headers = ['Shape', 'Color','Shape_corr', 'Size_corr', 'Loc_corr', 'Orient_corr', 'In_bounds', 'Full_struct_corr']
 rows = []
 
 for sample in samples: 
     row = []
     shape = sample['shape'] 
-    print(sample['index'])
+    
+    #print(sample['index'])
     
     if sample['net_seq'] == None:
         row.append(shape + '_botched')
         row.extend([0, 0, 0, 0, 0])
     else:
+        corr_bounds = sample['in_bounds']
         corr_shape = 0
         corr_color = 0
         corr_size = 0
@@ -170,6 +181,7 @@ for sample in samples:
 
         #CASE 5: DIAMOND ---NB HAVE TO DEAL WITH CENTER ISSUE
         if shape == 'diamond':
+            print(pred_shape)
             if pred_shape is True:
                 corr_shape = 1
                 if size[0] == pred_size[0]:
@@ -192,6 +204,7 @@ for sample in samples:
             row.append(corr_loc)
             row.append(corr_orient)
 
+    row.append(corr_bounds)
     #FINALLY CHECK FULL STRUCTURE
     #check if full structure is correct 
     if 0 not in row:

@@ -21,7 +21,7 @@ from trl import SFTTrainer, DataCollatorForCompletionOnlyLM
 model_name = "Meta-Llama-3-8B"
 
 # Fine-tuned model name
-new_model = "/tmpdir/thompson/llama-trois-local"
+new_model = "/tmpdir/thompson/llama-trois-local-flat"
 
 ################################################################################
 # QLoRA parameters
@@ -68,8 +68,8 @@ fp16 = False
 bf16 = False
 
 # Batch size per GPU for training
-per_device_train_batch_size = 1
-#per_device_train_batch_size = 5
+#per_device_train_batch_size = 1
+per_device_train_batch_size = 7
 
 # Batch size per GPU for evaluation
 per_device_eval_batch_size = 2
@@ -116,7 +116,7 @@ logging_steps = 25
 ################################################################################
 
 # Maximum sequence length to use
-max_seq_length = 710
+max_seq_length = 100
 #max_seq_length = 4096
 # max_new_tokens = 100 
 
@@ -128,7 +128,7 @@ packing = False
 device_map = "auto"
 # Load dataset (you can process it here)
 # The instruction dataset to use
-dataset = load_dataset("json", data_files={'train':'/tmpdir/thompson/parser_data/local_model_train.jsonl'})["train"]
+dataset = load_dataset("json", data_files={'train':'/tmpdir/thompson/parser_data/local_model_flat_train.jsonl'})["train"]
 #val_dataset = load_dataset("json", data_files={'val':'/tmpdir/thompson/parser_data/parser_val_stacsquish_15.jsonl'})["val"]
 
 #dataset = dataset.select(range(300))
@@ -252,8 +252,9 @@ trainer.model.save_pretrained(new_model)
 logging.set_verbosity(logging.CRITICAL)
 
 # Run text generation pipeline with our next model
-prompt = "<|begin_of_text|>Identify the discourse relation (DR) between the following EDUs :\n 0 <Buil> Mission has started .\n1 <Arch> alright ,\n ### DR:"
-pipe = pipeline(task="text-generation", model=model, tokenizer=tokenizer, max_length=200)
+#prompt = "<|begin_of_text|>Identify the discourse relation (DR) between the following EDUs :\n 0 <Buil> Mission has started .\n1 <Arch> alright ,\n ### DR:"
+prompt = "<|begin_of_text|>Identify the discourse structure (DR) between the following EDUs :\n 0 <Tomm> ello\n1 <Tomm> Just got a connection reset\n ### DR:"
+pipe = pipeline(task="text-generation", model=model, tokenizer=tokenizer, max_length=100)
 result = pipe(f"{prompt}")
 print(result[0]['generated_text'])
 
@@ -283,7 +284,7 @@ print("Device:",model.hf_device_map)
 print("Pad token:", (model.config.pad_token_id, tokenizer.pad_token_id))
 
 # output_merged_dir = "/tmpdir/thompson/llama-2-13b-parser"
-output_merged_dir = "/tmpdir/thompson/llama-trois-local"
+output_merged_dir = "/tmpdir/thompson/llama-trois-local-flat"
 os.makedirs(output_merged_dir, exist_ok=True)
 model.save_pretrained(output_merged_dir, safe_serialization=True)
 

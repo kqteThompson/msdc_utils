@@ -157,7 +157,7 @@ def is_diamond(net_act_seq):
             diam_l = diag_l1 + diag_l2 + diag_l3 + diag_l4
             if set(coords_list)==set(diam_l):
                 flag = True
-                return flag, (y_max-y_min)/2 + 1
+                return flag, [int((y_max-y_min)/2 + 1)]
     if y_min==y_max and x_max-x_min>0 and x_max-x_min==z_max-z_min:
         x_mid, z_mid = (x_max+x_min)/2, (z_max+z_min)/2
         if x_mid==int(x_mid) and z_mid==int(z_mid):
@@ -169,7 +169,7 @@ def is_diamond(net_act_seq):
             diam_l = diag_l1 + diag_l2 + diag_l3 + diag_l4
             if set(coords_list)==set(diam_l):
                 flag = True
-                return flag, (z_max-z_min)/2 + 1
+                return flag, [int((z_max-z_min)/2 + 1)]
     if z_min==z_max and x_max-x_min==y_max-y_min:
         x_mid, y_mid = (x_max+x_min)/2, (y_max+y_min)/2
         if x_mid==int(x_mid) and y_mid==int(y_mid):
@@ -181,7 +181,7 @@ def is_diamond(net_act_seq):
             diam_l = diag_l1 + diag_l2 + diag_l3 + diag_l4
             if set(coords_list)==set(diam_l):
                 flag = True
-                return flag, ((y_max-y_min)/2 + 1).item()
+                return flag, [int((y_max-y_min)/2 + 1)]
     return flag
     
 def is_diagonal(net_act_seq):
@@ -386,6 +386,20 @@ def get_color(net_act_seq):
     # Check if all the colors of place actions are same, and return that color. else, return list of all the colors.
     colors_l = [x.split(" ")[1] for x in net_act_seq if x.startswith("place")]
     return np.unique(colors_l)
+
+def boundary_check(net_act_seq):
+    in_bounds = 1
+    coords_list = [(int(x.split(" ")[2]), int(x.split(" ")[3]), int(x.split(" ")[4]))  for x in net_act_seq if x.startswith("place")]
+    max_x = max([t[0] for t in coords_list])
+    min_x = min([t[0] for t in coords_list])
+    max_z = max([t[2] for t in coords_list])
+    min_z = min([t[2] for t in coords_list])
+    min_y = min([t[1] for t in coords_list])
+    if max_x > 5 or max_z > 5:
+        in_bounds = 0
+    if min_x < -5 or min_z < -5 or min_y < 1:
+        in_bounds = 0
+    return in_bounds
     
 def get_net_sequence(act_seq):
     net_act_seq = []

@@ -14,12 +14,12 @@ def get_links(sample_string, sample_index):
     and a list of rel type strings
     """
     #MINECRAFT labels
-    # labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
-    #           'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ']
+    labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
+              'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ']
     
-    #STAC labels
-    labels = ['COM', 'CONTR', 'CORR', 'QAP', 'ACK', 'ELAB', 'CLARIFQ', 'COND', 'CONTIN', 'RES', 'EXPL', 
-                'QELAB','ALT', 'NARR', 'BACK', 'PAR', 'SEQ']
+    # #STAC labels
+    # labels = ['COM', 'CONTR', 'CORR', 'QAP', 'ACK', 'ELAB', 'CLARIFQ', 'COND', 'CONTIN', 'RES', 'EXPL', 
+    #             'QELAB','ALT', 'NARR', 'BACK', 'PAR', 'SEQ']
 
     split_list = [st.strip() for st in sample_string.split(' ')]
    
@@ -68,15 +68,15 @@ def get_links(sample_string, sample_index):
 current_folder=os.getcwd()
 
 
-# gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
-# # pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
-# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
+gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
+# pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
+pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
 
 # gold_path = current_folder + '/stac_llama/parser_stac_linguistic_test_15_checked.jsonl'
 # pred_path = current_folder + '/stac_llama/stac_linguistic/test-output-generate-file-llama3-stac_ling.txt'
 
-gold_path = current_folder + '/molweni/parser_molweni_test_15.jsonl'
-pred_path = current_folder + '/molweni/test-output-generate-file-llama3-molweni_ling_flat.txt'
+# gold_path = current_folder + '/molweni/parser_molweni_test_15.jsonl'
+# pred_path = current_folder + '/molweni/test-output-generate-file-llama3-molweni_ling_flat.txt'
 
 # gold_path = current_folder + '/stac_llama/parser_stac_linguistic_flat_test_15_checked.jsonl'
 # pred_path = current_folder + '/stac_llama/stac_flat/test-output-generate-file-llama3-stac_ling_flat.txt'
@@ -125,6 +125,7 @@ fp_distances = defaultdict(list)
 fn_distances = defaultdict(list)
 
 doubles = 0
+
 for i, s in enumerate(pred_outputs):
     #first do attachments
     pred_att, pred_all = get_links(s, i)

@@ -13,8 +13,19 @@ import numpy as np
 
 current_folder=os.getcwd()
 
-output_path = current_folder + '/llama_3_synthdata_level1.csv'
-save_path = current_folder + '/llama_synth_function_output.json'
+#Nebula
+# output_path = current_folder + '/llama_3_synthdata_level1.csv' ##1368
+# save_path = current_folder + '/llama_synth_function_output.json'
+
+#Nebula + Fine tuning
+# output_path = current_folder + '/llama_3_aug_synthdata_level1.csv'
+# save_path = current_folder + '/llama_aug_synth_function_output.json'
+
+#Nebula + Fine tuning #2
+output_path = current_folder + '/llama_3_aug_synthdata_level1_v2.csv'
+save_path = current_folder + '/llama_aug_synth_function_output_v2.json'
+
+#Nebula + 
 
 def get_moves(line):
     """
@@ -29,9 +40,10 @@ def get_moves(line):
     return moves
 
 def get_params(instruction):
+    axes = 0
     colors = ['purple', 'blue', 'red', 'green', 'yellow', 'orange']
     shapes = ['tower', 'rectangle', 'cube', 'diagonal', 'diamond', 'row', 'square']
-    locations = ['edge', 'center', 'centre', 'corner', 'side']
+    locations = ['edge', 'center', 'centre', 'corner']
     orients = ['vertical', 'horizontal']
     params = dict.fromkeys(['color', 'shape', 'location', 'orient', 'size'])
     for color in colors:
@@ -41,6 +53,9 @@ def get_params(instruction):
     for shape in shapes:
         if shape in instruction:
             params['shape'] = shape
+            if shape == 'diamond':
+                if 'axes' in instruction:
+                    axes = 1
             break
     for location in locations:
         if location in instruction:
@@ -63,6 +78,10 @@ def get_params(instruction):
         params['size'] = [int(t) for t in threed[0].split('x')]
     elif len(twod) == 1:
         params['size'] = [int(t) for t in twod[0].split('x')]
+
+    if axes:
+        #make sure the size is the side!
+        params['size'] = [int((params['size'][0] + 1)/2)]
     
     return params
 
@@ -88,6 +107,7 @@ for line in data[1:]:
     if len(moves) == 0:
         func_obj['net_seq'] = None
     else:
+        func_obj['in_bounds'] = fn.boundary_check(moves)
         seq = fn.get_net_sequence(moves)
         func_obj['net_seq'] = seq
         #then for each of the params, run function
