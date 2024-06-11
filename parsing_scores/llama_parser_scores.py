@@ -70,7 +70,8 @@ current_folder=os.getcwd()
 
 gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
 # pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
-pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
+# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
+pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-randomize.txt'
 
 # gold_path = current_folder + '/stac_llama/parser_stac_linguistic_test_15_checked.jsonl'
 # pred_path = current_folder + '/stac_llama/stac_linguistic/test-output-generate-file-llama3-stac_ling.txt'
@@ -245,7 +246,7 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/outputs_june/scores_llama3_molweni_flat_10.txt","w")
+f = open(current_folder + "/outputs_june/scores_llama3_msdc_10-generate-random.txt","w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)
