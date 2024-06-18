@@ -8,7 +8,7 @@ current_folder=os.getcwd()
 
 
 data_path = current_folder + '/parser_test_moves_15.jsonl'
-ablation_path = current_folder + '/parser_test_moves_15_nostructure.jsonl'
+ablation_path = current_folder + '/parser_test_moves_15_struct-two.jsonl'
 
 ablation = []
 
@@ -24,7 +24,9 @@ with jsonlines.open(data_path) as reader:
         for s in split:
             if 'Structure:' not in s:
                 new_sample.append(s)
-        join_sample = '/n'.join(new_sample)
+            else:
+                new_sample.append('Structure:')
+        join_sample = '\n'.join(new_sample)
         new_obj['sample'] = join_sample
         ablation.append(new_obj)
 
