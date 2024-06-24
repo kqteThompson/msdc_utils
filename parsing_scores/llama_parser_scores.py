@@ -67,9 +67,11 @@ def get_links(sample_string, sample_index):
 
 current_folder=os.getcwd()
 
+gold_path = current_folder + '/ablation/parser_test_moves_15_narr_ablation.jsonl'
+pred_path = current_folder + '/ablation/test-output-file-narrablation.txt'
 
-gold_path = current_folder + '/msdc_llama/parser_test_moves_15_struct-two.jsonl'
-pred_path = current_folder + '/msdc_llama/test-output-file-nostruct-two.txt'
+# gold_path = current_folder + '/msdc_llama/parser_test_moves_15_struct-two.jsonl'
+# pred_path = current_folder + '/msdc_llama/test-output-file-nostruct-two.txt'
 
 # gold_path = current_folder + '/msdc_llama/parser_test_moves_15_nostructure.jsonl'
 # pred_path = current_folder + '/msdc_llama/test-output-file-nostruct.txt'
@@ -253,7 +255,7 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/outputs_june/scores_llama3_msdc_10-nostructure-two.txt","w")
+f = open(current_folder + "/outputs_june/scores_llama3_msdc_10-narrablation.txt","w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)
