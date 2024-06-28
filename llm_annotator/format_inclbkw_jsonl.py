@@ -1,4 +1,6 @@
 """
+VERSION 2 of format_jsonl.py which includes backwards relations
+
 takes a json of annotated minecraft games and converts to 
 a turn format to be used in LLAMA parsing. 
 
@@ -64,6 +66,24 @@ def get_structure(indexes, head, rels):
         structs.append((map_rels_str[rel['type']], rel['x'], rel['y']))
     return structs
 
+def get_structure_bkwds(indexes, head, rels):
+    """
+    Takes a list of edu indexes and the annotated relations
+    finds the relations with the targets == indexes and sources !< head 
+    **DOES NOT IGNORE backwards relations
+    !!returns a list of tuples (<type>, x, y)
+    """
+    structs = []
+    rel_list = [r for r in rels if r['y'] in indexes and r['y'] > r['x'] and r['x'] >= head]
+    bkw_list = [r for r in rels if r['y'] in indexes and r['x'] > r['y'] and r['y'] >= head]
+    rel_list.extend(bkw_list)
+    #count backwards rels
+    global backwards_count 
+    backwards_count += len(bkw_list)
+    for rel in rel_list:
+        structs.append((map_rels_str[rel['type']], rel['x'], rel['y']))
+    return structs
+
 def relation_window(construct, window, head):
     """
     takes a context structure list afer the window has been changed
@@ -78,6 +98,25 @@ def relation_window(construct, window, head):
     ##the individual lists represent turns 
     for i in new_const:
         newc = [rel for rel in i if rel[1] >= head]
+        if len(newc) > 0:
+            out_const.append(newc)
+    # print('out const: ', out_const)
+    return out_const
+
+def relation_window_bkwd(construct, window, head):
+    """
+    takes a context structure list afer the window has been changed
+    the new window start index, and the new head index 
+    removes any relations whose sources OR TARGETS are outside the window
+    """
+    out_const = []
+    # print('in: ', construct)
+    new_const = [c for c in construct[window:]]
+    # print('out: ', new_const)
+    ##don't want to flatten the structures here
+    ##the individual lists represent turns 
+    for i in new_const:
+        newc = [rel for rel in i if rel[1] >= head and rel[2] >= head]
         if len(newc) > 0:
             out_const.append(newc)
     # print('out const: ', out_const)
@@ -108,11 +147,15 @@ def format_sample(ddict):
     sample = [x_entry, y_entry]
     return sample
 
+def count_gold_backwards_rels(rels):
+    count = len([r for r in rels if r['y'] < r['x']])
+    return count 
+
 current_folder=os.getcwd()
 
-data_path = current_folder + '/TEST_turns.json'
-annotation_path = current_folder + '/annotated_data/TEST_101_bert.json'
-save_path = current_folder + '/parser_test_moves_15.jsonl'
+data_path = current_folder + '/TRAIN_turns.json'
+annotation_path = current_folder + '/annotated_data/TRAIN_307_bert.json'
+save_path = current_folder + '/parser_train_moves_15_bkw.jsonl'
 
 with open(data_path, 'r') as j:
     jfile = json.load(j)
@@ -122,7 +165,8 @@ with open(annotation_path, 'r') as j:
     jfile = json.load(j)
     annotations = jfile
 
-
+backwards_count = 0
+gold_backwards_count = 0
 json_l = []
 
 DISTANCE = 15
@@ -133,6 +177,7 @@ for game in games:
     game_count += 1
     game = preprocess_edus(game) #preprocess game edus
     rels = [dial['relations'] for dial in annotations if dial['id'] == game_id][0] #get relations
+    gold_backwards_count += count_gold_backwards_rels(rels)
     s = defaultdict(list,{ k:[] for k in ('context','structure','turn', 'predict') }) #sample pattern
     s['context'].append(game['turns'][0]['edus']) #add first turn (append so that we can easily remove turns)
     #don't add relations for the first turn\
@@ -145,7 +190,7 @@ for game in games:
             #add relations to be predicted
             #get relations that have turn edus indices as target
             #keep track of smallest source index
-            preds = get_structure(turn['indexes'], head_source, rels)
+            preds = get_structure_bkwds(turn['indexes'], head_source, rels)
             s['predict'].extend(preds)
             #add s to json_l list
             snapshot = format_sample(s)
@@ -187,12 +232,13 @@ for game in games:
             head_source = int(s['context'][0][0].split('<')[0].strip())
             
             #!!!!BUT STILL need to check indices of current context: 
-            s['structure'] = relation_window(s['structure'], new_window, head_source)
+            #!!! also include backwards relations
+            s['structure'] = relation_window_bkwd(s['structure'], new_window, head_source)
             
            
             #add the new turn and pred structure
             s['turn'].extend(turn['edus'])
-            preds = get_structure(turn['indexes'], head_source, rels)
+            preds = get_structure_bkwds(turn['indexes'], head_source, rels)
             s['predict'].extend(preds)
             #add s to json_l list
             snapshot = format_sample(s)
@@ -206,15 +252,7 @@ for game in games:
             #empty 
             s['predict'] = []
             s['turn'] = []
-    #clear everything after game
-    # s['structure'] = []
-    # s['context'] =[]
-    # s['predict'] = []
-    # s['turn'] = []
-# for l in json_l:
-#     print(l[0])
-#     print(l[1])
-#     print('--------------------')
+
 
 #convert the dicts into json dicts for json_l
 with jsonlines.open(save_path, mode='w') as writer:
@@ -227,6 +265,7 @@ with jsonlines.open(save_path, mode='w') as writer:
 # with open(save_path, 'w') as outfile:
 #     json.dump(turn_version, outfile)
 
-print('jsonl saved for {} games'.format(game_count))
+print('jsonl saved for {} samples'.format(game_count))
+print('{} total backwards relations added to samples out of {}.'.format(backwards_count, gold_backwards_count))
     
   

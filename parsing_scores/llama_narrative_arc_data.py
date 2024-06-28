@@ -76,10 +76,10 @@ map_relations = {'COM':0, 'CONTR':1, 'CORR':2, 'QAP':3, 'ACK':4,'ELAB':5,
 current_folder=os.getcwd()
 
 
-gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
-pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
+gold_path = current_folder + '/msdc_llama/parser_val_moves_15.jsonl'
+pred_path = current_folder + '/msdc_llama/val-output-generate-file-llama3.txt'
 
-save_path = current_folder + '/msdc_llama/test-output-generate-2p-format.pkl'
+save_path = current_folder + '/msdc_llama/val-output-generate-2p-format.pkl'
 
 
 ##get pred output list
@@ -103,7 +103,7 @@ for t in text:
 
 #print(pred_outputs)
 
-assert len([p for p in pred_outputs if p[1] == 1]) == 101
+assert len([p for p in pred_outputs if p[1] == 1]) == 100
 
 
 # #get gold sample list

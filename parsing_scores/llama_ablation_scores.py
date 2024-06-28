@@ -19,6 +19,7 @@ def get_links(sample_string, sample_index):
     num_nulls = 0
     labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
               'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ', 'NONE']
+    # labels = ['NARR']
 
 
     split_list = [st.strip() for st in sample_string.split(' ')]
@@ -53,24 +54,33 @@ def get_links(sample_string, sample_index):
                 num_rels += 1
                 attach_list.append(rel + '(' + s[0] + ',' + s[1] +')')
     #print(attach_list)
- 
+    # if len(attach_list) == 0:
+    #     attach_list.append('NONE')
+    #     num_nulls += 1
     return attach_list, num_rels, num_nulls
     
 current_folder=os.getcwd()
 
-gold_path = current_folder + '/ablation/parser_val_moves_15_narr_ablation.jsonl'
-pred_path = current_folder + '/ablation/val-output-file-narrablation.txt'
+gold_path = current_folder + '/ablation/parser_val_moves_15_corr+narr_ablation.jsonl'
+pred_path = current_folder + '/ablation/val-output-file-corrnarr.txt'
 
 #get pred output list
 with open(pred_path, 'r') as txt:
     text = txt.read().split('\n')
 
 pred_outputs = []
+pred_contexts = []
+context = []
 
 for t in text:
     if '### DS:' in t:
         sample = t.split('### DS:')[1].strip()
         pred_outputs.append(sample)
+        pred_contexts.append(context)
+        context = []
+    else:
+        context.append(t)
+    
 
 #get gold sample list
 gold_outputs = []
@@ -91,6 +101,10 @@ gold_rel = 0
 pred_null = 0
 pred_rel = 0
 
+
+false_positive_check = []
+false_negative_check = []
+num_fp = 0
 for i, s in enumerate(pred_outputs):
 
     # print(i)
@@ -107,32 +121,48 @@ for i, s in enumerate(pred_outputs):
 
     #calculate the precision, recall, and f1 for the sample and add to global counts
     if gold_att[0] != 'NONE':
-        # prec = len([e for e in pred_att if e in gold_att])/len(pred_att)
-        # rec = len([e for e in pred_att if e in gold_att])/len(gold_att)
         total_attach_tp += len([e for e in pred_att if e in gold_att])
         total_attach_fn += len([e for e in gold_att if e not in pred_att])
+        # if len([e for e in gold_att if e not in pred_att]) > 0:
+        #     new_entry = [num_fp]
+        #     num_fp+= 1
+        #     new_entry.append('game index: ' + str(i))
+        #     new_entry.extend(pred_contexts[i])
+        #     new_entry.append('PREDICTED:')
+        #     new_entry.extend(pred_att)
+        #     new_entry.append('GOLD:')
+        #     new_entry.extend(gold_att)
+        #     false_negative_check.append(new_entry)
+
     elif pred_att[0] != 'NONE':
-        print('false positive: ', i, pred_att)
+        new_entry = [num_fp]
+        num_fp+= 1
+        new_entry.append('game index: ' + str(i))
+        new_entry.extend(pred_contexts[i])
+        new_entry.append('PREDICTED:')
+        new_entry.extend(pred_att)
+        new_entry.append('GOLD:')
+        new_entry.extend(gold_att)
+        false_positive_check.append(new_entry)
         total_attach_fp += len([e for e in pred_att if e not in gold_att])
 
-    # att_prec_l.append(prec)
-    # att_rec_l.append(rec)
-    # if prec+rec==0:
-    #     att_f1_l.append(0)
-    # else:
-    #     att_f1_l.append(2*prec*rec/(prec+rec))    
-
-print('tp', total_attach_tp)
-print('fp', total_attach_fp)
-print('fn', total_attach_fn)
+print('true pos', total_attach_tp)
+print('false pos', total_attach_fp)
+print('false neg', total_attach_fn)
 microf1 = total_attach_tp/(total_attach_tp + 0.5*(total_attach_fp + total_attach_fn)) 
-print('validation corr')
+print('val corr+narr')
 print('Gold rel/num null: {}/{}'.format(gold_rel, gold_null))
 print('Pred rel/num null: {}/{}'.format(pred_rel, pred_null))
-print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l))
-print("Attachment Average Precision:",np.mean(att_prec_l))
-print("Attachment Average Recall:",np.mean(att_rec_l))
-print('Micro F1: ', microf1)
+# print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l))
+# print("Attachment Average Precision:",np.mean(att_prec_l))
+# print("Attachment Average Recall:",np.mean(att_rec_l))
+print('Macro F1: ', microf1)
 print('--------------------------------')
 
 
+f = open(current_folder + "/validate_corrnarr_falsepositive_check.txt","w")
+for entry in false_positive_check:
+    for ent in entry:
+        print(ent, file=f)
+    print('----------------------------\n', file=f)
+print("checks done")
