@@ -7,8 +7,8 @@ import jsonlines
 current_folder=os.getcwd()
 
 
-data_path = current_folder + '/parser_val_moves_15.jsonl'
-ablation_path = current_folder + '/parser_val_moves_15_nostructure.jsonl'
+data_path = current_folder + '/parser_stac_test_15.jsonl'
+ablation_path = current_folder + '/parser_stac_test_15_nostructure.jsonl'
 
 ablation = []
 

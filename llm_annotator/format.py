@@ -35,7 +35,7 @@ def is_nl(edu):
     # print(words)
     # print(words)
     for word in [w for w in words if w != '']:
-        if not contains_number(word) or len(word) < 5:
+        if not contains_number(word) or len(word) != 5:
             nl = 0
             break
     # print(nl)
