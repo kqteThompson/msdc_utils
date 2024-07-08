@@ -417,72 +417,72 @@ def get_net_sequence(act_seq):
                 net_act_seq.pop(idx)
     return net_act_seq
 
-if __name__=="__main__":
-    # act_seq = ['place red -4 3 1', 'place red -4 3 0', 'place red -4 3 -1', 'place red -3 3 1', 'place red -3 3 -1', 
-    #            'place red -2 3 1', 'place red -2 3 0', 'place red -2 3 -1']
-    # act_seq = ['place purple 5 1 -1', 'place purple 5 2 -1', 'place purple 5 3 -1', 'place purple 5 4 -1']
-    # act_seq = ['place purple 5 1 -1', 'place purple 5 1 0', 'place purple 5 1 1', 'place purple 5 2 -1', 'place purple 5 2 0', 
-    #            'place purple 5 2 1', 'place purple 5 3 -1', 'place purple 5 3 0', 'place purple 5 3 1', 'place purple 4 3 1',
-    #            'place purple 3 3 1', 'place purple 2 3 1', 'place purple 2 3 0', 'place purple 2 3 -1', 'place purple 3 3 -1',
-    #            'place purple 4 3 -1']
-    act_seq = [
-              "place purple 1 1 1",
-            "place purple 0 1 1",
-            "place purple -1 1 1",
-            "place purple -1 1 0",
-            "place purple -1 1 -1",
-            "place purple 0 1 -1",
-            "place purple 1 1 -1",
-            "place purple 1 1 0"
-        ]
-    net_act_seq = get_net_sequence(act_seq)
-    #print(net_act_seq)
-    # l = is_rectangle_unfilled(net_act_seq)
-    # print(l)
-    # t = is_tower(net_act_seq)
-    # print(t)
-    # print('-------------------')
-    # cb = is_cube(net_act_seq)
-    # print(cb)
-    # print('-------------------')
-    # cu = is_cube_unfilled(net_act_seq)
-    # print(cu)
-    # print('-------------------')
-    # s = is_square(net_act_seq)
-    # print(s)
-    # print('--------------------------')
-    # su = is_square_unfilled(net_act_seq)
-    # print(su)
-    # print('--------------------------')
-    # cu = is_cube(net_act_seq)
-    # print(cu)
-    # print('--------------------------')
-    # cuu = is_cube_unfilled(net_act_seq)
-    # print(cuu)
-    # print('--------------------------')
-    # cua = is_cube_all(net_act_seq)
-    # print(cua)
-    # print('--------------------------')
-    # s = is_rectangle(net_act_seq)
-    # print(s)
-    # print('--------------------------')
-    # su = is_rectangle_unfilled(net_act_seq)
-    # print(su)
-    # print('--------------------------')
-    print('--------------------------')
-    di = is_diamond(net_act_seq)
-    print(di)
-    print('--------------------------')
-    c = get_color(net_act_seq)
-    print(c)
-    print('-------------------------')
-    o = get_orientation(net_act_seq)
-    print(o)
-    print('-------------------------------')
-    loc = get_location_list(net_act_seq)
-    print(loc)
-    cent = get_center_quads(net_act_seq, 'diamond')
-    print(cent)
-    print('-------------------------------')
+# if __name__=="__main__":
+#     # act_seq = ['place red -4 3 1', 'place red -4 3 0', 'place red -4 3 -1', 'place red -3 3 1', 'place red -3 3 -1', 
+#     #            'place red -2 3 1', 'place red -2 3 0', 'place red -2 3 -1']
+#     # act_seq = ['place purple 5 1 -1', 'place purple 5 2 -1', 'place purple 5 3 -1', 'place purple 5 4 -1']
+#     # act_seq = ['place purple 5 1 -1', 'place purple 5 1 0', 'place purple 5 1 1', 'place purple 5 2 -1', 'place purple 5 2 0', 
+#     #            'place purple 5 2 1', 'place purple 5 3 -1', 'place purple 5 3 0', 'place purple 5 3 1', 'place purple 4 3 1',
+#     #            'place purple 3 3 1', 'place purple 2 3 1', 'place purple 2 3 0', 'place purple 2 3 -1', 'place purple 3 3 -1',
+#     #            'place purple 4 3 -1']S
+#     act_seq = [
+#               "place purple 1 1 1",
+#             "place purple 0 1 1",
+#             "place purple -1 1 1",
+#             "place purple -1 1 0",
+#             "place purple -1 1 -1",
+#             "place purple 0 1 -1",
+#             "place purple 1 1 -1",
+#             "place purple 1 1 0"
+#         ]
+#     net_act_seq = get_net_sequence(act_seq)
+#     #print(net_act_seq)
+#     # l = is_rectangle_unfilled(net_act_seq)
+#     # print(l)
+#     # t = is_tower(net_act_seq)
+#     # print(t)
+#     # print('-------------------')
+#     # cb = is_cube(net_act_seq)
+#     # print(cb)
+#     # print('-------------------')
+#     # cu = is_cube_unfilled(net_act_seq)
+#     # print(cu)
+#     # print('-------------------')
+#     # s = is_square(net_act_seq)
+#     # print(s)
+#     # print('--------------------------')
+#     # su = is_square_unfilled(net_act_seq)
+#     # print(su)
+#     # print('--------------------------')
+#     # cu = is_cube(net_act_seq)
+#     # print(cu)
+#     # print('--------------------------')
+#     # cuu = is_cube_unfilled(net_act_seq)
+#     # print(cuu)
+#     # print('--------------------------')
+#     # cua = is_cube_all(net_act_seq)
+#     # print(cua)
+#     # print('--------------------------')
+#     # s = is_rectangle(net_act_seq)
+#     # print(s)
+#     # print('--------------------------')
+#     # su = is_rectangle_unfilled(net_act_seq)
+#     # print(su)
+#     # print('--------------------------')
+#     print('--------------------------')
+#     di = is_diamond(net_act_seq)
+#     print(di)
+#     print('--------------------------')
+#     c = get_color(net_act_seq)
+#     print(c)
+#     print('-------------------------')
+#     o = get_orientation(net_act_seq)
+#     print(o)
+#     print('-------------------------------')
+#     loc = get_location_list(net_act_seq)
+#     print(loc)
+#     cent = get_center_quads(net_act_seq, 'diamond')
+#     print(cent)
+#     print('-------------------------------')
 
 

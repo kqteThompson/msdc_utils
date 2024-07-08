@@ -14,7 +14,7 @@ beginning of the arc, as well as the last set of moves.
 
 NEW:
 
-text_to_csv_worldstate.py : a new version of worldstate where it is just a list of place moves, 
+text_to_json_worldstate.py : a new version of worldstate where it is just a list of place moves, 
 one for each block that is in the grid, in the order that it was placed. 
 
 json_to_csv_worldstate.py : a new version of json_to_csv where the worldstate format is changed to a list of 
