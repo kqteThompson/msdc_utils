@@ -267,7 +267,7 @@ def cube(color, size, orientation, location):
 
 def square(color, size, orientation, location):
     act_seq = []
-    if orientation==None:
+    if orientation=="":
         orientation="horizontal"
     if orientation=="horizontal":
         if location=="centre":
@@ -392,7 +392,8 @@ def square(color, size, orientation, location):
 def rectangle(color, size, orientation, location):
     act_seq = []
     assert len(size)==2
-    if orientation==None:
+    # if orientation==None:
+    if orientation=="":
         orientation="horizontal"
     if orientation=="horizontal":
         if location=="centre":
@@ -518,7 +519,7 @@ def rectangle(color, size, orientation, location):
 def diamond(color, size, orientation, location):
     act_seq = []
     assert location==None
-    if orientation==None:
+    if orientation=="":
         orientation="horizontal"
     if orientation=="horizontal":
         x_min, x_max = -1*size + 1, size-1

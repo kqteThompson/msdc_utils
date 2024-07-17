@@ -14,12 +14,12 @@ def get_links(sample_string, sample_index):
     and a list of rel type strings
     """
     #MINECRAFT labels
-    labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
-              'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ']
+    # labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
+    #           'RES','EXPL','QELAB','ALT','NARR','CONFQ','SEQ']
     
     # #STAC labels
-    # labels = ['COM', 'CONTR', 'CORR', 'QAP', 'ACK', 'ELAB', 'CLARIFQ', 'COND', 'CONTIN', 'RES', 'EXPL', 
-    #             'QELAB','ALT', 'NARR', 'BACK', 'PAR', 'SEQ']
+    labels = ['COM', 'CONTR', 'CORR', 'QAP', 'ACK', 'ELAB', 'CLARIFQ', 'COND', 'CONTIN', 'RES', 'EXPL', 
+                'QELAB','ALT', 'NARR', 'BACK', 'PAR', 'SEQ']
 
     split_list = [st.strip() for st in sample_string.split(' ')]
    
@@ -67,8 +67,11 @@ def get_links(sample_string, sample_index):
 
 current_folder=os.getcwd()
 
-gold_path = current_folder + '/msdc_llama/parser_test_moves_15_bkw.jsonl'
-pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-bkw.txt'
+gold_path = current_folder + '/stac_llama/parser_stac_test_15_nostructure.jsonl'
+pred_path = current_folder + '/stac_llama/test-output-file-stac-nostruct.txt'
+
+# gold_path = current_folder + '/msdc_llama/parser_test_moves_15_bkw.jsonl'
+# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-bkw.txt'
 
 # gold_path = current_folder + '/ablation/parser_test_moves_15_narr_ablation.jsonl'
 # pred_path = current_folder + '/ablation/test-output-file-narrablation.txt'
@@ -258,7 +261,7 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/outputs_june/scores_llama3_msdc_10-bkw.txt","w")
+f = open(current_folder + "/outputs_june/scores_llama3_stac_10-nostructure.txt","w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)
@@ -269,8 +272,6 @@ print("Attachment + Rel Average Precision:",np.mean(type_prec_l))
 print("Attachment + Rel Average Recall:",np.mean(type_rec_l))
 print('---------------------------------------')
 print(classification_report(gold_list,pred_list,target_names=labels), file=f)
-
-
 
 # The F1-scores for all the relations are correct. 
 #It's calculated the same way as N said. 

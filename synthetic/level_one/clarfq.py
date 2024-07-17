@@ -1,13 +1,18 @@
 import random
 
 """
-[size, col, orient, loc] always in this order
+ROW, DIAGONAL, TOWER, CUBE have no orientations
 """
 
 def no_orient_clarif(params_list):
+    """
+    ROW, DIAGONAL, TOWER, CUBE have no orientations
+    """
     instruction = None
     clarifq = None
     answer = None 
+
+    param_update = {}
 
     SHAPE = params_list['shape']
 
@@ -87,7 +92,9 @@ def no_orient_clarif(params_list):
                 else:
                     answer = f"<Architect> At the {params_list['loc']}.".replace("  "," ")
             else:
-                answer = f"<Architect> Anywhere."
+                r_loc = random.choice(["Through the centre", "On an edge", "At a corner"])
+                answer = f"<Architect> {r_loc}."
+                param_update['loc'] = r_loc.split(' ')[2]
         elif SHAPE in ['tower']:
             instruction = f"<Architect> Build a {params_list['col']} {SHAPE} {params_list['size']} blocks tall.".replace("  "," ")
             clarifq = f"<Builder> Where?"
@@ -97,40 +104,59 @@ def no_orient_clarif(params_list):
                 else:
                     answer = f"<Architect> At the {params_list['loc']}.".replace("  "," ")
             else:
-                answer = f"<Architect> Anywhere."
+                r_loc = random.choice(["Through the centre", "On an edge", "At a corner"])
+                answer = f"<Architect> {r_loc}."
+                param_update['loc'] = r_loc.split(' ')[2]
         elif SHAPE in ['cube']:
             instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['col']} {SHAPE}.".replace("  "," ")
             clarifq = f"<Builder> Where?"
             if LOC:  
                 answer = f"<Architect> {params_list['loc']}."
             else:
-                answer = f"<Architect> Anywhere."
-    return [instruction, clarifq, answer]  
+                r_loc = random.choice(["At the centre", "On an edge", "At a corner"])
+                answer = f"<Architect> {r_loc}."
+                param_update['loc'] = r_loc.split(' ')[2]
+    return [instruction, clarifq, answer], param_update 
 
 def diamond_clarifq(params_list):
     """
-    Takes a list of params, returns a list of three utterances
+    DIAMONDS DO NOT HAVE LOCATION
     """
     instruction = None
     clarifq = None
     answer = None 
 
+    param_update = {}
+
     SHAPE = params_list['shape']
+
+    if params_list['orient'] == "":
+        OR = 0
+    else:
+        OR = 1
 
     #chose one param at random
     params = [k for k in params_list.keys() if k not in ['shape', 'loc']] #diamonds don't have location
     rand = random.choice(params)
     if rand == 'size':
-        instruction = f"<Architect> Build an {params_list['col']} {params_list['orient']} {SHAPE}.".replace("  "," ")
+        if OR:
+            instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE}.".replace("  "," ")
+        else:
+            instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE}.".replace("  "," ") 
         clarifq = f"<Builder> What size?".replace("  "," ")
         a_one = f"<Architect> A {SHAPE} with {params_list['size']} blocks on a side.".replace("  "," ")
         a_two = f"<Architect> A {SHAPE} with axes {2*params_list['size']-1} spaces long.".replace("  "," ")
         answer = random.choice([a_one, a_two])
 
     elif rand == 'col':
-        i_one = f"<Architect> Build a {params_list['orient']} {SHAPE} with {params_list['size']} blocks on a side.".replace("  "," ")
-        i_two = f"<Architect> Build a {params_list['orient']} {SHAPE} with axes {2*params_list['size']-1} spaces long.".replace("  "," ")
-        instruction = random.choice([i_one, i_two])
+        if OR:
+            i_one = f"<Architect> Build a {params_list['orient']} {SHAPE} with {params_list['size']} blocks on a side.".replace("  "," ")
+            i_two = f"<Architect> Build a {params_list['orient']} {SHAPE} with axes {2*params_list['size']-1} spaces long.".replace("  "," ")
+            instruction = random.choice([i_one, i_two])
+        else:
+            i_one = f"<Architect> Build a {SHAPE} with {params_list['size']} blocks on a side.".replace("  "," ")
+            i_two = f"<Architect> Build a {SHAPE} with axes {2*params_list['size']-1} spaces long.".replace("  "," ")
+            instruction = random.choice([i_one, i_two])
         clarifq = f"<Builder> What color {SHAPE}?".replace("  "," ")
         answer = f"<Architect> {params_list['col']}."
 
@@ -139,17 +165,24 @@ def diamond_clarifq(params_list):
         i_two = f"<Architect> Build a {params_list['col']} {SHAPE} with axes {2*params_list['size']-1} spaces long.".replace("  "," ")
         instruction = random.choice([i_one, i_two])
         clarifq = f"<Builder> Horizontal or vertical?".replace("  "," ")
-        answer = f"<Architect> {params_list['orient']}."
+        if OR:
+            answer = f"<Architect> {params_list['orient']}.".replace("  "," ")
+        else:
+            r_or = random.choice(["horizontal", "vertical"])
+            answer = f"<Architect> {r_or}.".replace("  "," ")
+            param_update['orient'] = r_or
          
-    return [instruction, clarifq, answer] 
+    return [instruction, clarifq, answer], param_update
 
 def rectangle_clarifq(params_list):
     """
-    Takes a list of params, returns a list of three utterances
+    RECTANGLES
     """
     instruction = None
     clarifq = None
     answer = None 
+
+    param_update = {}
 
     SHAPE = params_list['shape']
 
@@ -157,24 +190,37 @@ def rectangle_clarifq(params_list):
         LOC = 0
     else:
         LOC = 1
+    
+    if params_list['orient'] == "":
+        OR = 0
+    else:
+        OR = 1
 
     #chose one param at random
     params = [k for k in params_list.keys() if k not in ['shape', 'r']] 
     rand = random.choice(params)
     #Sprint('rand: ', rand)
     if rand == 'size':
-        if LOC:
+        if LOC and OR:
             instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE} at the {params_list['loc']}.".replace("  "," ")
-        else:
+        elif LOC and not OR:
+            instruction = f"<Architect> Build a {params_list['col']} {SHAPE} at the {params_list['loc']}.".replace("  "," ")
+        elif OR and not LOC:
             instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE}.".replace("  "," ")
+        else:
+            instruction = f"<Architect> Build a {params_list['col']} {SHAPE}.".replace("  "," ")
         clarifq = f"<Builder> What size?".replace("  "," ")
         answer = f"<Architect> {params_list['r']}x{params_list['size']}.".replace("  "," ")
 
     elif rand == 'col':
-        if LOC:
+        if LOC and OR:
             instruction = f"<Architect> Build a {params_list['r']}x{params_list['size']} {params_list['orient']} {SHAPE} at the {params_list['loc']}.".replace("  "," ")
-        else:
+        elif LOC and not OR:
+            instruction = f"<Architect> Build a {params_list['r']}x{params_list['size']} {SHAPE} at the {params_list['loc']}.".replace("  "," ")
+        elif OR and not LOC:
             instruction = f"<Architect> Build a {params_list['r']}x{params_list['size']} {params_list['orient']} {SHAPE}.".replace("  "," ")
+        else:
+            instruction = f"<Architect> Build a {params_list['r']}x{params_list['size']} {SHAPE}.".replace("  "," ")
         clarifq = f"<Builder> What color {SHAPE}?".replace("  "," ")
         answer = f"<Architect> {params_list['col']}."
 
@@ -184,7 +230,13 @@ def rectangle_clarifq(params_list):
         else:
             instruction = f"<Architect> Build a {params_list['col']} {params_list['r']}x{params_list['size']} {SHAPE}.".replace("  "," ")
         clarifq = f"<Builder> Horizontal or vertical?".replace("  "," ")
-        answer = f"<Architect> {params_list['orient']}."
+        if OR:
+            answer = f"<Architect> {params_list['orient']}.".replace("  "," ")
+        else:
+            r_or = random.choice(["horizontal", "vertical"])
+            print('rrr,', r_or)
+            answer = f"<Architect> {r_or}.".replace("  "," ")
+            param_update['orient'] = r_or
 
     elif rand == 'loc':
         instruction = f"<Architect> Build a {params_list['col']} {params_list['r']}x{params_list['size']} {params_list['orient']} {SHAPE}.".replace("  "," ")
@@ -192,17 +244,20 @@ def rectangle_clarifq(params_list):
         if LOC:  
             answer = f"<Architect> {params_list['loc']}."
         else:
-            answer = f"<Architect> Anywhere."
+            r_loc = random.choice(["At the centre", "On an edge", "At a corner"])
+            answer = f"<Architect> {r_loc}."
+            param_update['loc'] = r_loc.split(' ')[2]
          
-    return [instruction, clarifq, answer] 
+    return [instruction, clarifq, answer], param_update
 
-def clarif_question(params_list):
+def square_clarif(params_list):
     """
-    Takes a list of params, returns a list of three utterances
+    SQUARES
     """
     instruction = None
     clarifq = None
     answer = None 
+    param_update = {}
 
     SHAPE = params_list['shape']
 
@@ -211,43 +266,60 @@ def clarif_question(params_list):
     else:
         LOC = 1
 
+    if params_list['orient'] == "":
+        OR = 0
+    else:
+        OR = 1
+
     #chose one param at random
     params = [k for k in params_list.keys() if k != 'shape']
     rand = random.choice(params)
     if rand == 'size':
-        if SHAPE in ['square']:
-            if LOC:
-                instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE} of at the {params_list['loc']}.".replace("  "," ")
-            else:
-                instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE}.".replace("  "," ")
-            clarifq = f"<Builder> What size {SHAPE}?"
-            answer = f"<Architect> {params_list['size']}x{params_list['size']}."
+        if LOC and OR:
+            instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE} of at the {params_list['loc']}.".replace("  "," ")
+        elif LOC and not OR:
+            instruction = f"<Architect> Build a {params_list['col']} {SHAPE} of at the {params_list['loc']}.".replace("  "," ")
+        elif OR and not LOC: 
+            instruction = f"<Architect> Build a {params_list['col']} {params_list['orient']} {SHAPE}.".replace("  "," ")
+        else:
+            instruction = f"<Architect> Build a {params_list['col']} {SHAPE}.".replace("  "," ")
+        clarifq = f"<Builder> What size {SHAPE}?"
+        answer = f"<Architect> {params_list['size']}x{params_list['size']}."
     elif rand == 'col':
-        if SHAPE in ['square']:
-            if LOC:
-                instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['orient']} {SHAPE} at the {params_list['loc']}.".replace("  "," ")
-            else:
-                instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['orient']} {SHAPE}.".replace("  "," ")
-            clarifq = f"<Builder> What color {SHAPE}?"
-            answer = f"<Architect> {params_list['col']}."
-
+        if LOC and OR:
+            instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['orient']} {SHAPE} at the {params_list['loc']}.".replace("  "," ")
+        elif LOC and not OR:
+            instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {SHAPE} at the {params_list['loc']}.".replace("  "," ")
+        elif OR and not LOC:
+            instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['orient']} {SHAPE}.".replace("  "," ")
+        else:
+            instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {SHAPE}.".replace("  "," ")
+        clarifq = f"<Builder> What color {SHAPE}?"
+        answer = f"<Architect> {params_list['col']}."
     elif rand == 'loc':
-        if SHAPE in ['square']:
+        if OR:
             instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['orient']} {params_list['col']} {SHAPE}.".replace("  "," ")
-            clarifq = f"<Builder> Where?"
-            if LOC:  
-                answer = f"<Architect> {params_list['loc']}."
-            else:
-                answer = f"<Architect> Anywhere."
-    ## !! will only be for diamonds, rectangles and squares
+        else:
+            instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {SHAPE}.".replace("  "," ")
+        clarifq = f"<Builder> Where?"
+        if LOC:  
+            answer = f"<Architect> {params_list['loc']}."
+        else:
+            r_loc = random.choice(["At the centre", "On an edge", "At a corner"])
+            answer = f"<Architect> {r_loc}."
+            param_update['loc'] = r_loc.split(' ')[2]
     elif rand == 'orient':
-        assert SHAPE in ['square']
         if LOC:
             instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['col']} {SHAPE} of at the {params_list['loc']}.".replace("  "," ")
         else:
             instruction = f"<Architect> Build a {params_list['size']}x{params_list['size']} {params_list['col']} {SHAPE}.".replace("  "," ")
         clarifq = f"<Builder> Horizontal or vertical?"
-        answer = f"<Architect> {params_list['orient']}.".replace("  "," ")
+        if OR:
+            answer = f"<Architect> {params_list['orient']}.".replace("  "," ")
+        else:
+            r_or = random.choice(["horizontal", "vertical"])
+            answer = f"<Architect> {r_or}.".replace("  "," ")
+            param_update['orient'] = r_or
     
 
-    return [instruction, clarifq, answer]
+    return [instruction, clarifq, answer], param_update
