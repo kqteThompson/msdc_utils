@@ -44,8 +44,8 @@ def get_links(sample_string, sample_index):
                 #make sure the label is well-formed 
                 rel = r
     
-        if rel != None and s_tuple != None and (s_tuple[1] - s_tuple[0]) >= 10:
-        # if rel != None and s_tuple != None:
+        # if rel != None and s_tuple != None and (s_tuple[1] - s_tuple[0]) >= 10:
+        if rel != None and s_tuple != None:
             attach_list.append((int(s[0]), int(s[1])))
             rel_list.append(r)
     
@@ -67,47 +67,9 @@ def get_links(sample_string, sample_index):
 
 current_folder=os.getcwd()
 
-gold_path = current_folder + '/ablation/parser_val_moves_full.jsonl'
-pred_path = current_folder + '/ablation/parser_full_val_inc_output.txt'
+gold_path = current_folder + '/parser_val_moves_15.jsonl'
+pred_path = current_folder + '/val-output-file-corr_abl.txt'
 
-# gold_path = current_folder + '/msdc_full/parser_val_moves_wh.jsonl'
-# pred_path = current_folder + '/msdc_full/parser_wh_val_output.txt'
-
-# gold_path = current_folder + '/msdc_full/parser_test_moves_full.jsonl'
-# pred_path = current_folder + '/msdc_full/parser_full_test_output.txt'
-
-# gold_path = current_folder + '/stac_llama/parser_stac_test_15_nostructure.jsonl'
-# pred_path = current_folder + '/stac_llama/test-output-file-stac-nostruct.txt'
-
-# gold_path = current_folder + '/msdc_llama/parser_test_moves_15_bkw.jsonl'
-# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-bkw.txt'
-
-# gold_path = current_folder + '/ablation/parser_test_moves_15_narr_ablation.jsonl'
-# pred_path = current_folder + '/ablation/test-output-file-narrablation.txt'
-
-# gold_path = current_folder + '/msdc_llama/parser_test_moves_15_struct-two.jsonl'
-# pred_path = current_folder + '/msdc_llama/test-output-file-nostruct-two.txt'
-
-# gold_path = current_folder + '/msdc_llama/parser_test_moves_15_nostructure.jsonl'
-# pred_path = current_folder + '/msdc_llama/test-output-file-nostruct.txt'
-
-#gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
-# pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
-# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
-# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-randomize.txt'
-#pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-randomize-attach.txt'
-
-# gold_path = current_folder + '/stac_llama/parser_stac_linguistic_test_15_checked.jsonl'
-# pred_path = current_folder + '/stac_llama/stac_linguistic/test-output-generate-file-llama3-stac_ling.txt'
-
-# gold_path = current_folder + '/molweni/parser_molweni_test_15.jsonl'
-# pred_path = current_folder + '/molweni/test-output-generate-file-llama3-molweni_ling_flat.txt'
-
-# gold_path = current_folder + '/stac_llama/parser_stac_linguistic_flat_test_15_checked.jsonl'
-# pred_path = current_folder + '/stac_llama/stac_flat/test-output-generate-file-llama3-stac_ling_flat.txt'
-
-# gold_path = current_folder + '/stac_llama/parser_stac_test_15.jsonl'
-# pred_path = current_folder + '/stac_llama/stac_squished/test-output-generate-file-llama3-stac.txt'
 
 #get pred output list
 with open(pred_path, 'r') as txt:
@@ -270,7 +232,7 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/score_outputs/scores_llama3_generate_val_full_over10.txt","w")
+f = open(current_folder + "/scores_llama3_corr_abl.txt","w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)

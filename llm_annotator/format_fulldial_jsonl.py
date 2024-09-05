@@ -16,6 +16,17 @@ parameters:
 -relations as words or numbers
 
 NB: when creating json-l, use '###PS' for 'predict structure'
+
+
+[0, 30, 79, 98, 124, 174, 217, 235, 260, 275, 347, 382, 455, 475, 
+502, 522, 542, 576, 604, 649, 668, 713, 744, 766, 796, 822, 851, 
+861, 916, 943, 989, 1026, 1069, 1090, 1117, 1155, 1166, 1209, 1257, 
+1286, 1332, 1343, 1357, 1374, 1427, 1460, 1487, 1534, 1584, 1637, 1663, 
+1677, 1727, 1800, 1826, 1844, 1861, 1903, 1940, 1970, 2000, 2013, 2063, 
+2109, 2143, 2175, 2217, 2265, 2303, 2345, 2399, 2466, 2505, 2532, 2574,
+ 2584, 2611, 2634, 2661, 2689, 2733, 2748, 2821, 2839, 2851, 2865, 2875, 
+ 2907, 2943, 2976, 2997, 3011, 3033, 3055, 3086, 3114, 3137, 3148, 3169, 3190, 3210]
+
 """
 
 import os
@@ -138,11 +149,14 @@ with open(annotation_path, 'r') as j:
     jfile = json.load(j)
     annotations = jfile
 
+# index_count = 0
+# start_dial_indexes = []
 
 json_l = []
 
 game_count = 0
 for game in games:
+    #json_l.append(['BEGIN', 'DIALOGUE'])
     game_id = game['id']
     print(game_id)
     game_count += 1
@@ -150,6 +164,8 @@ for game in games:
     rels = [dial['relations'] for dial in annotations if dial['id'] == game_id][0] #get relations
     s = defaultdict(list,{ k:[] for k in ('context','structure','turn', 'predict') }) #sample pattern
     s['context'].append(game['turns'][0]['edus']) #add first turn (append so that we can easily remove turns)
+    # start_dial_indexes.append(index_count)
+    # index_count += 1
     #don't add relations for the first turn\
     edu_distance = 1 #the first turn always has one edu
     head_source = 0 #the index of the edu that is the first in the context window.
@@ -168,6 +184,7 @@ for game in games:
         #now move the 'turn' edus to 'context' and the 'predict' to 'structure'
         s['structure'].append(s['predict'])
         s['context'].append(s['turn'])
+        # index_count += 1
         #update distance
         edu_distance += len(turn['edus'])
         # print('!!',edu_distance)
@@ -197,5 +214,6 @@ with jsonlines.open(save_path, mode='w') as writer:
 #     json.dump(turn_version, outfile)
 
 print('jsonl saved for {} games'.format(game_count))
+
     
   
