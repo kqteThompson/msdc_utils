@@ -1,7 +1,9 @@
 import csv
+import jsonlines
 import os
 import numpy as np
 from shape_gen import get_instruction, generate, get_second_shape, bad_generate
+from data_gen import json_format
 
 # S = {"square", "row", "rectangle", "tower", "diagonal", "diamond", "cube"}
 S = {"row", "tower"}
@@ -10,20 +12,8 @@ C = {"orange", "red", "green", "blue", "purple", "yellow"}
 # O = {"horizontal", "vertical",""}
 
 
-"""
-TODO: 
--Second instruction should start with 'and'
--Correction instruction should be one edu. 
--structure should always be 
-RES(0,1), CONT(0,2), RES(2,3)
--then the next two increments should be either:
-CORR(1,4), RES(4,5), CORR(1,5) (for type 1)
-or 
-CORR(3,4), RES(4,5), CORR(3,5) (for type 2)
--Run llamipa with both gold and generated context
-"""
-
-dialogues = []
+dialogues_text = []
+llamipa_format = []
 
 for shape in S:
     for color in C:
@@ -31,7 +21,7 @@ for shape in S:
             for size in range(3,6):
                 for t in [1,2]: #t1 == first instruction botched, #t2 ==
                     #create the instruction 
-                    instructions = []
+                    instructions = ['<Buil> Mission has started.']
 
                     i_one = get_instruction(shape, color, location, size)
 
@@ -49,7 +39,7 @@ for shape in S:
 
                     shape_2 = get_second_shape(location)
 
-                    i_two = get_instruction(shape_2[0], shape_2[1], shape_2[2], shape_2[3])
+                    i_two = get_instruction(shape_2[0], shape_2[1], shape_2[2], shape_2[3], i=2)
 
                     instructions.append(i_two)
 
@@ -71,33 +61,44 @@ for shape in S:
                         n+=1
                         number_instructions.append(new_i)
 
+                    #send to other script in order to make llamipa jsonl file
+                    samples = json_format(number_instructions, t)
+                    llamipa_format.extend(samples)
+
                     #add the correction scheme according to type
                     if t == 1:
-                        structure = 'Structure: CORR(1,4), RES(4,5), CORR(1,5)'
+                        structure = 'Structure: CONTIN(0,1), RES(1,2), CONTIN(1,3), RES(3,4), CORR(2,5), RES(5,6), CORR(2,6)'
                         number_instructions.append(structure)
                     else:
-                        structure = 'Structure: CORR(3,4), RES(4,5), CORR(3,5)'
+                        structure = 'Structure: CONTIN(0,1), RES(1,2), CONTIN(1,3), RES(3,4), CORR(4,5), RES(5,6), CORR(4,6)'
                         number_instructions.append(structure)
 
                     instruction_str = '\n'.join(number_instructions)
-                    dialogues.append(instruction_str)
+                    dialogues_text.append(instruction_str)
 
-print('Number of dialogues: ',len(dialogues))
+print('Number of dialogues: ',len(dialogues_text))
 
 current_folder=os.getcwd()
 
 f = open(current_folder + "/synthetic_corrections_check.txt","w")
-for d in dialogues:
+for d in dialogues_text:
     print(d, file=f)
     print('----------------------------\n', file=f)
 print("dialogues printed")
 
 
-#                     instruction_str = '\n'.join(instructions)
+#make llamipa jsonl
+#convert the dicts into json dicts for json_l
+with jsonlines.open(current_folder + "/synthetic_corrections_test.jsonl", mode='w') as writer:
+    for s in llamipa_format[:216]:
+        # sample = {}
+        # sample['PS'] = l[1]
+        # sample['sample'] = l[0]
+        writer.write(s)
+print('jsonl saved for {} samples'.format(len(llamipa_format[:216])))
 
-#                     dialogues.append([instruction_str, a_corr])
-                    
-# print(len(dialogues))
+
+
 
 # current_folder = os.getcwd()
 # fields = ['dial_with_actions', 'action_seq']

@@ -3,22 +3,41 @@ import random
 import build_functions as bs
 import functions as fun
 
-def get_instruction(shape, color, location, size):
+def get_instruction(shape, color, location, size, i=1):
     if shape == 'row':
         if location == 'centre':
-            instruction = f"<Arch> Build a row of {size} {color} blocks at the centre.".replace("  "," ")
+            if i==1:
+                instruction = f"<Arch> Build a row of {size} {color} blocks at the centre.".replace("  "," ")
+            elif i==2:
+                instruction = f"<Arch> And build a row of {size} {color} blocks at the centre.".replace("  "," ")
         else:
-            instruction = f"<Arch> Build a row of {size} {color} blocks at a {location}.".replace("  "," ")
+            if i==1:
+                instruction = f"<Arch> Build a row of {size} {color} blocks at a {location}.".replace("  "," ")
+            elif i==2:
+                instruction = f"<Arch> And build a row of {size} {color} blocks at a {location}.".replace("  "," ")
+
     elif shape == 'tower':
         if location == 'centre':
-            instruction = f"<Arch> Build a {color} tower of size {size} at the centre.".replace("  "," ")
+            if i==1:
+                instruction = f"<Arch> Build a {color} tower of size {size} at the centre.".replace("  "," ")
+            elif i==2:
+                instruction = f"<Arch> And build a {color} tower of size {size} at the centre.".replace("  "," ")
         else:
-            instruction = f"<Arch> Build a {color} tower of size {size} at a {location}.".replace("  "," ")
+            if i==1:
+                instruction = f"<Arch> Build a {color} tower of size {size} at a {location}.".replace("  "," ")
+            elif i==2:
+                instruction = f"<Arch> And build a {color} tower of size {size} at a {location}.".replace("  "," ")
     elif shape == 'block':
         if location == 'centre':
-            instruction = f"<Arch> Place a {color} block at the centre.".replace("  "," ")
+            if i==1:    
+                instruction = f"<Arch> Place a {color} block at the centre.".replace("  "," ")
+            elif i==2:
+                instruction = f"<Arch> And place a {color} block at the centre.".replace("  "," ")
         else:
-            instruction = f"<Arch> Place a {color} block at a {location}.".replace("  "," ")
+            if i==1:
+                instruction = f"<Arch> Place a {color} block at a {location}.".replace("  "," ")
+            elif i==2:
+                instruction = f"<Arch> And place a {color} block at a {location}.".replace("  "," ")
 
     return instruction
 
@@ -46,21 +65,21 @@ def generate(shape, color, location, size):
 def get_color_correction(color, wrong_color, location, wrong_seq):
     #NB right now for single blocks only
     if location == 'centre':
-        instruction = f"<Arch> No, the centre block should be {color}, not {wrong_color}.".replace("  "," ")
+        instruction = f"<Arch> The centre block should be {color}.".replace("  "," ")
     else:
-        instruction = f"<Arch> No, make the block at the {location} {color}.".replace("  "," ")
+        instruction = f"<Arch> The block a the {location} should be {color}.".replace("  "," ")
 
     wrong = wrong_seq[0].split(' ')
     move_one = 'pick ' + ' '.join(wrong[2:])
     move_two = 'place ' + color + ' ' + ' '.join(wrong[2:])
-    correct_seq = '<Buil> ' + move_one + ', ' + move_two + 'colorcorrect'
+    correct_seq = '<Buil> ' + move_one + ', ' + move_two 
     return instruction, correct_seq
 
 def get_height_correction(color, location, size, wrong_size, wrong_seq):
     if location == 'centre':
-        instruction = f"<Arch> No, the {color} tower at the centre should be size {size}.".replace("  "," ")
+        instruction = f"<Arch> The {color} tower at the centre should be size {size}.".replace("  "," ")
     else:
-        instruction = f"<Arch> No, the {color} tower at the {location} should be size {size}.".replace("  "," ")
+        instruction = f"<Arch> The {color} tower at the {location} should be size {size}.".replace("  "," ")
 
     wrong = wrong_seq[-1]
     w = wrong.split(' ')
@@ -71,14 +90,13 @@ def get_height_correction(color, location, size, wrong_size, wrong_seq):
         #it's a removal
         correct_seq = ' '.join(['<Buil>', 'pick' + w[2] + w[3] + w[4]])
     
-    correct_seq += 'heightcorrect'
     return instruction, correct_seq
 
 def get_length_correction(color, location, size, wrong_size, wrong_seq):
     if location == 'centre':
-        instruction = f"<Arch> No, the {color} row at the centre should be {size} blocks.".replace("  "," ")
+        instruction = f"<Arch> The {color} row at the centre should be {size} blocks.".replace("  "," ")
     else:
-        instruction = f"<Arch> No, the {color} row at the {location} should be {size} blocks.".replace("  "," ")
+        instruction = f"<Arch> The {color} row at the {location} should be {size} blocks.".replace("  "," ")
 
     wrong = wrong_seq[-1] #NB: always take last placement to leave the row 'in a corner' 
     w = wrong.split(' ')
@@ -98,7 +116,6 @@ def get_length_correction(color, location, size, wrong_size, wrong_seq):
             h = str(int(wrong.split(' ')[2]) + 1)
             correct_seq = ' '. join(['<Buil>', 'place', color, h, w[3], w[4]]) 
 
-    correct_seq += 'lengthcorrect'
     return instruction, correct_seq
 
 
