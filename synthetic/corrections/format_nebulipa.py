@@ -49,10 +49,12 @@ for dial in dialogues[:108]:
                 new = old[0].strip() + '. Buil:' + old[1]
                 context.append(new)
         elif 'Structure' in d:
-            # old = d.split(', RES(5,6)')
-            # context.append(old[0])
+            old = d.split(', RES(5,6)')
+            c = old[0].split('),')[-1].strip()
+            new_c = 'Structure: RES(1,2) CONTIN(1,3) RES(3,4) ' + c
+            context.append(new_c)
             #no structure:
-            context.append('Structure:')
+            # context.append('Structure:')
     #add Worldstate and join context
     context.append('Worldstate: EMPTY')
     full_context = '\n'.join(context)
@@ -61,7 +63,7 @@ for dial in dialogues[:108]:
 print(len(nebulipa), ' dialogues')
 
 fields = ['dial_with_actions', 'action_seq']
-with open(current_folder + '/correction_synth_nebulipa_test_without_structure.csv', 'w') as f:
+with open(current_folder + '/correction_synth_nebulipa_test_with_structure.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(fields)
     for n in nebulipa:
