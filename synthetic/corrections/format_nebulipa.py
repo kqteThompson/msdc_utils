@@ -1,9 +1,9 @@
 import csv
-import jsonlines
+# import jsonlines
 import os
-import numpy as np
-from shape_gen import get_instruction, generate, get_second_shape, bad_generate
-from data_gen import json_format
+# import numpy as np
+# from shape_gen import get_instruction, generate, get_second_shape, bad_generate
+# from data_gen import json_format
 
 """
 Takes a text file of synthetic examples and converts them to nebulipa format
@@ -11,7 +11,7 @@ Takes a text file of synthetic examples and converts them to nebulipa format
 
 current_folder=os.getcwd()
 
-with open(current_folder + '/synthetic_corrections_check_freeze.txt') as f:
+with open(current_folder + '/synthetic_corrections_short_check.txt') as f:
     samples = f.read().split('\n')
 
 
@@ -28,7 +28,7 @@ for line in samples:
         dialogue.append(line)
 
 nebulipa = []
-for dial in dialogues[:108]:
+for dial in dialogues:
     #reformat 1 <Arch> to 1. Arch:
     #add Worldstate: EMPTY
     #reformat instructions
@@ -41,7 +41,8 @@ for dial in dialogues[:108]:
             context.append(new)
         elif '<Buil>' in d:
             old = d.split('<Buil>')
-            if old[0].strip() == '6':
+            if old[0].strip() == '7': #7 for short, 9 for long
+            # if old[0].strip() == '9':
                 #do something
                 m = '\n'.join(old[1].split(','))
                 moves.append(m)
@@ -49,11 +50,17 @@ for dial in dialogues[:108]:
                 new = old[0].strip() + '. Buil:' + old[1]
                 context.append(new)
         elif 'Structure' in d:
-            old = d.split(', RES(5,6)')
-            c = old[0].split('),')[-1].strip()
-            new_c = 'Structure: RES(1,2) CONTIN(1,3) RES(3,4) ' + c
+            ##FOR LONG
+            # old = d.split(', RES(6,7),')
+            # c = old[1].split('),')[-1].strip()
+            # new_c = 'Structure: CONTIN(1,2) RES(2,3) CONTIN(2,4) RES(4,5) CONTIN(4,6) RES(6,7) ' + c
+            # context.append(new_c)
+            ##FOR SHORT
+            old = d.split(', RES(4,5),')
+            c = old[1].split('),')[-1].strip()
+            new_c = 'Structure: CONTIN(1,2) RES(2,3) CONTIN(2,4) RES(4,5) ' + c
             context.append(new_c)
-            #no structure:
+            # #no structure:
             # context.append('Structure:')
     #add Worldstate and join context
     context.append('Worldstate: EMPTY')
@@ -63,7 +70,7 @@ for dial in dialogues[:108]:
 print(len(nebulipa), ' dialogues')
 
 fields = ['dial_with_actions', 'action_seq']
-with open(current_folder + '/correction_synth_nebulipa_test_with_structure.csv', 'w') as f:
+with open(current_folder + '/correction_synth_nebulipa_SHORT_with_structure.csv', 'w') as f:
     write = csv.writer(f)
     write.writerow(fields)
     for n in nebulipa:

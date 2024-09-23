@@ -10,34 +10,74 @@ def get_instruction(shape, color, location, size, i=1):
                 instruction = f"<Arch> Build a row of {size} {color} blocks at the centre.".replace("  "," ")
             elif i==2:
                 instruction = f"<Arch> And build a row of {size} {color} blocks at the centre.".replace("  "," ")
+            elif i==3:
+                instruction = f"<Arch> And also build a row of {size} {color} blocks at the centre.".replace("  "," ")
         else:
+            if location == 'edge':
+                glocation = 'an edge'
+            else: 
+                glocation = 'a corner'
             if i==1:
-                instruction = f"<Arch> Build a row of {size} {color} blocks at a {location}.".replace("  "," ")
+                instruction = f"<Arch> Build a row of {size} {color} blocks at {glocation}.".replace("  "," ")
             elif i==2:
-                instruction = f"<Arch> And build a row of {size} {color} blocks at a {location}.".replace("  "," ")
+                instruction = f"<Arch> And build a row of {size} {color} blocks at {glocation}.".replace("  "," ")
+            elif i==3:
+                instruction = f"<Arch> Also build a row of {size} {color} blocks at {glocation}.".replace("  "," ")
 
     elif shape == 'tower':
+        if color == 'orange':
+            gcolor = 'an orange'
+        else:
+            gcolor = 'a ' + color
         if location == 'centre':
             if i==1:
-                instruction = f"<Arch> Build a {color} tower of size {size} at the centre.".replace("  "," ")
+                instruction = f"<Arch> Build {gcolor} tower of size {size} at the centre.".replace("  "," ")
             elif i==2:
-                instruction = f"<Arch> And build a {color} tower of size {size} at the centre.".replace("  "," ")
+                instruction = f"<Arch> And build {gcolor} tower of size {size} at the centre.".replace("  "," ")
+            elif i==3:
+                instruction = f"<Arch> And also build {gcolor} tower of size {size} at the centre.".replace("  "," ")
         else:
+            if location == 'edge':
+                glocation = 'an edge'
+            else: 
+                glocation = 'a corner'
+            if color == 'orange':
+                gcolor = 'an orange'
+            else:
+                gcolor = 'a ' + color
             if i==1:
-                instruction = f"<Arch> Build a {color} tower of size {size} at a {location}.".replace("  "," ")
+                instruction = f"<Arch> Build {gcolor} tower of size {size} at {glocation}.".replace("  "," ")
             elif i==2:
-                instruction = f"<Arch> And build a {color} tower of size {size} at a {location}.".replace("  "," ")
+                instruction = f"<Arch> And build {gcolor} tower of size {size} at {glocation}.".replace("  "," ")
+            elif i==3:
+                instruction = f"<Arch> Also build {gcolor} tower of size {size} at {glocation}.".replace("  "," ")
     elif shape == 'block':
         if location == 'centre':
+            if color == 'orange':
+                gcolor = 'an orange'
+            else:
+                gcolor = 'a ' + color
             if i==1:    
-                instruction = f"<Arch> Place a {color} block at the centre.".replace("  "," ")
+                instruction = f"<Arch> Place {gcolor} block at the centre.".replace("  "," ")
             elif i==2:
-                instruction = f"<Arch> And place a {color} block at the centre.".replace("  "," ")
+                instruction = f"<Arch> And place {gcolor} block at the centre.".replace("  "," ")
+            elif i==3:
+                instruction = f"<Arch> Also place {gcolor} block at the centre.".replace("  "," ")
         else:
+            if location == 'edge':
+                glocation = 'an edge'
+            else: 
+                glocation = 'a corner'
+            if color == 'orange':
+                gcolor = 'an orange'
+            else:
+                gcolor = 'a ' + color
             if i==1:
-                instruction = f"<Arch> Place a {color} block at a {location}.".replace("  "," ")
+                instruction = f"<Arch> Place {gcolor} block at {glocation}.".replace("  "," ")
             elif i==2:
-                instruction = f"<Arch> And place a {color} block at a {location}.".replace("  "," ")
+                instruction = f"<Arch> And place {gcolor} block at {glocation}.".replace("  "," ")
+            elif i==3:
+                instruction = f"<Arch> And also place {gcolor} block at {glocation}.".replace("  "," ")
 
     return instruction
 
@@ -67,7 +107,7 @@ def get_color_correction(color, wrong_color, location, wrong_seq):
     if location == 'centre':
         instruction = f"<Arch> The centre block should be {color}.".replace("  "," ")
     else:
-        instruction = f"<Arch> The block a the {location} should be {color}.".replace("  "," ")
+        instruction = f"<Arch> The block at the {location} should be {color}.".replace("  "," ")
 
     wrong = wrong_seq[0].split(' ')
     move_one = 'pick ' + ' '.join(wrong[2:])
@@ -110,10 +150,36 @@ def get_length_correction(color, location, size, wrong_size, wrong_seq):
         #it's an addition, but need to know whether to add to z or to x
         if f[2] == w[2]:
             #then z has been changing
-            h = str(int(w[4]) + 1)
+            #now find out what the endpoints are
+            #look at z coords from both ends and decide where to add
+            ep_one = int(f[4])
+            ep_two = int(w[4])
+            if ep_one > ep_two:
+                if abs(ep_one) != 5:
+                    h = str(int(f[4]) + 1)
+                else:
+                    h = str(int(w[4]) - 1)
+            else:
+                if abs(ep_one) != 5:
+                    h = str(int(f[4]) - 1)
+                else:
+                    h = str(int(w[4]) + 1)
             correct_seq = ' '.join(['<Buil>', 'place', color, w[2], w[3], h]) 
         else:
-            h = str(int(wrong.split(' ')[2]) + 1)
+            # then x has been changing 
+            # h = str(int(wrong.split(' ')[2]) + 1)
+            ep_one = int(f[2])
+            ep_two = int(w[2])
+            if ep_one > ep_two:
+                if abs(ep_one) != 5:
+                    h = str(int(f[2]) + 1)
+                else:
+                    h = str(int(w[2]) - 1)
+            else:
+                if abs(ep_one) != 5:
+                    h = str(int(f[2]) - 1)
+                else:
+                    h = str(int(w[2]) + 1)
             correct_seq = ' '. join(['<Buil>', 'place', color, h, w[3], w[4]]) 
 
     return instruction, correct_seq
@@ -150,14 +216,14 @@ def bad_generate(shape, color, location, size):
 
     return builder_str, correction, correct_gen
 
-def get_second_shape(location):
+def get_next_shape(location_list):
     """
     get the dimensions of the second shape 
     """
-   
-    shapes = ['row', 'tower', 'block']
+    locations = ['centre', 'corner', 'edge']
+    shapes = ['tower', 'block']
     colors = ['blue', 'green', 'purple', 'yellow', 'orange', 'red']
-    sizes = [3,4,5,6]
+    sizes = [3,4,5]
 
     shape = random.choice(shapes)
     if shape == 'block':
@@ -165,13 +231,37 @@ def get_second_shape(location):
     else:
         size = random.choice(sizes)
     color = random.choice(colors)
-    if location == 'centre':
-        new_loc = random.choice(['corner', 'edge'])
-    else:
-        new_loc = 'centre'
+
+    #just take the a location that hasn't yet been used
+    for loc in locations:
+        if loc not in location_list:
+            new_loc = loc
+    # if location == 'centre':
+    #     new_loc = random.choice(['corner', 'edge'])
+    # else:
+    #     new_loc = 'centre'
     
     new_shape = (shape, color, new_loc, size)
 
     return new_shape
 
 
+def record_blocks(placement_list):
+    # print(placement_list)
+    coords_list = []
+    pl = placement_list.strip('<Buil> ')
+    # print(pl)
+    for place in pl.split(','):
+        p = place.strip().split(' ')[2:]
+        coords_list.append(tuple(p))
+    # print(coords_list)
+    return coords_list
+
+# def record_correction_blocks(placement_list):
+#     coords_list = []
+#     pl = placement_list.strip('<Buil> ')
+#     if 'pick' not in pl:
+#         for place in pl.split(','):
+#             p = place.strip().split(' ')[2:]
+#             coords_list.append(tuple(p))
+#     return coords_list 

@@ -26,8 +26,14 @@ current_folder=os.getcwd()
 # save_path = current_folder + '/nebulipa_clarif_withstructure.json'
 
 #nebulipa WITHOUT structure
-output_path = current_folder + '/nebulipa_clarif_withoutstructure.csv'
-save_path = current_folder + '/nebulipa_clarif_withoutstructure.json'
+# output_path = current_folder + '/nebulipa_clarif_withoutstructure.csv'
+# save_path = current_folder + '/nebulipa_clarif_withoutstructure.json'
+
+#nebuipa correction without structure
+output_path = current_folder + '/nebulipa_corrsynth_nostruct.csv'
+save_path = current_folder + '/nebulipa_corrsynth_nostruct.json'
+
+
  
 def get_instruction(line):
     """

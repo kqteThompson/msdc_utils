@@ -24,8 +24,12 @@ current_folder=os.getcwd()
 # save_path = current_folder + '/nebulipa_clarif_withstructure_foranalysis.csv'
 
 #nebulipa WITHOUT structure
-json_path = current_folder + '/nebulipa_clarif_withoutstructure.json'
-save_path = current_folder + '/nebulipa_clarif_withoutstructure_foranalysis.csv'
+# json_path = current_folder + '/nebulipa_clarif_withoutstructure.json'
+# save_path = current_folder + '/nebulipa_clarif_withoutstructure_foranalysis.csv'
+
+#nebulipa WITHOUT structure
+json_path = current_folder + '/nebulipa_corrsynth_nostruct.json'
+save_path = current_folder + '/nebulipa_corrsynth_nostruct_foranalysis.csv'
 
 with open(json_path, 'r') as j:
     jfile = json.load(j)
@@ -77,7 +81,7 @@ for i, sample in enumerate(samples):
 
         #CASE 1: TOWER, ROW, DIAGONAL
         if shape in ['row', 'diagonal', 'tower']:
-            print()
+            print(shape)
             if pred_shape is True:
                 corr_shape = 1
                 if size[0] == pred_size[0]:
