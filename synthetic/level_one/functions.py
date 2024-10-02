@@ -38,6 +38,9 @@ def is_rectangle_unfilled(net_act_seq):
     y_list = [a[1] for a in coords_list]
     z_list = [a[2] for a in coords_list]
     flag = False
+     #check case where just a straight line
+    if (len(set(x_list)) == 1 and len(set(y_list)) == 1) or (len(set(x_list)) == 1 and len(set(z_list)) == 1) or (len(set(z_list)) == 1 and len(set(y_list)) == 1):
+        return flag
     x_min, x_max, y_min, y_max, z_min, z_max = np.min(x_list), np.max(x_list), np.min(y_list), np.max(y_list), np.min(z_list), np.max(z_list)
     if x_min==x_max and y_max-y_min>0:
        filled_rect_l = [(x_min,y,z) for y in range(y_min,y_max+1) for z in range(z_min,z_max+1)]
@@ -116,7 +119,10 @@ def is_rectangle(net_act_seq):
     y_list = [a[1] for a in coords_list]
     z_list = [a[2] for a in coords_list]
     flag = False
-    x_min, x_max, y_min, y_max, z_min, z_max = np.min(x_list), np.max(x_list), np.min(y_list), np.max(y_list), np.min(z_list), np.max(z_list)
+    #check case where just a straight line
+    if (len(set(x_list)) == 1 and len(set(y_list)) == 1) or (len(set(x_list)) == 1 and len(set(z_list)) == 1) or (len(set(z_list)) == 1 and len(set(y_list)) == 1):
+        return flag
+    x_min, x_max, y_min, y_max, z_min, z_max = np.min(x_list), np.max(x_list), np.min(y_list), np.max(y_list), np.min(z_list), np.max(z_list)  
     if x_min==x_max and y_max-y_min>0:
        rect_l = [(x_min,y,z) for y in range(y_min,y_max+1) for z in range(z_min,z_max+1)]
        if set(coords_list)==set(rect_l):
@@ -140,6 +146,9 @@ def is_diamond(net_act_seq):
     # The four diagonals are (i) From ((x_max+x_min)/2, y_min) to (x_max, (y_max+y_min)/2) (ii) From ((x_max+x_min)/2, y_max) to (x_max, (y_max+y_min)/2)
     # (iii) From (x_min, (y_max+y_min)/2) to ((x_max+x_min)/2, y_max), (iv) From (x_min, (y_max+y_min)/2) to ((x_max+x_min)/2, y_min)
     # If the pred seq is diamond, return True along with size (x_max-x_min)/2 + 1, else False 
+    if len(net_act_seq) == 1:
+        flag = False
+        return flag
     coords_list = [(int(x.split(" ")[2]), int(x.split(" ")[3]), int(x.split(" ")[4]))  for x in net_act_seq if x.startswith("place")]
     x_list = [a[0] for a in coords_list]
     y_list = [a[1] for a in coords_list]
@@ -224,6 +233,10 @@ def is_cube(net_act_seq):
     y_list = [a[1] for a in coords_list]
     z_list = [a[2] for a in coords_list]
     flag = False
+     #check case where just a straight line
+    if (len(set(x_list)) == 1 and len(set(y_list)) == 1) or (len(set(x_list)) == 1 and len(set(z_list)) == 1) or (len(set(z_list)) == 1 and len(set(y_list)) == 1):
+        return flag
+    
     x_min, x_max, y_min, y_max, z_min, z_max = np.min(x_list), np.max(x_list), np.min(y_list), np.max(y_list), np.min(z_list), np.max(z_list)
     cube_l = [(x,y,z) for x in range(x_min,x_max+1) for y in range(y_min,y_max+1) for z in range(z_min,z_max+1)]
     if set(coords_list)==set(cube_l) and x_max-x_min==y_max-y_min and y_max-y_min==z_max-z_min:
@@ -232,19 +245,22 @@ def is_cube(net_act_seq):
     return flag
 
 def is_cube_all(net_act_seq):
-    flag = False
     coords_list = [(int(x.split(" ")[2]), int(x.split(" ")[3]), int(x.split(" ")[4]))  for x in net_act_seq if x.startswith("place")]
+    x_list = [a[0] for a in coords_list]
+    y_list = [a[1] for a in coords_list]
+    z_list = [a[2] for a in coords_list]
+    flag = False
+    #check case where just a straight line
+    if (len(set(x_list)) == 1 and len(set(y_list)) == 1) or (len(set(x_list)) == 1 and len(set(z_list)) == 1) or (len(set(z_list)) == 1 and len(set(y_list)) == 1):
+        return flag
+    
+    #start regular check
     max_x = max([t[0] for t in coords_list])
     min_x = min([t[0] for t in coords_list])
     max_z = max([t[2] for t in coords_list])
     min_z = min([t[2] for t in coords_list])
     max_y = max([t[1] for t in coords_list])
-    # print(max_x)
-    # print(min_x)
-    # print(max_z)
-    # print(min_z)
-    # print(max_y)
-    
+  
     side_one = [(x,y,z) for x in range(min_x,max_x+1) for y in range(1,max_y+1) for z in [min_z]]
     side_two = [(x,y,z) for x in range(min_x,max_x+1) for y in range(1,max_y+1) for z in [max_z]]
     side_three = [(x,y,z) for x in [min_x] for y in range(1,max_y+1) for z in range(min_z, max_z+1)]

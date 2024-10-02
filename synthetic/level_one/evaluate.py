@@ -20,8 +20,12 @@ current_folder=os.getcwd()
 # save_path = current_folder + '/llama_aug_synth_level_one_output_for_analysis.csv'
 
 #Nebula + finetuning #2
-json_path = current_folder + '/llama_aug_synth_function_output_v2.json'
-save_path = current_folder + '/llama_aug_synth_level_one_output_for_analysis_v2.csv'
+# json_path = current_folder + '/llama_aug_synth_function_output_v2.json'
+# save_path = current_folder + '/llama_aug_synth_level_one_output_for_analysis_v2.csv'
+
+#Neural builder
+json_path = current_folder + '/neural_builder_lvl1_synth_function_output.json'
+save_path = current_folder + '/neural_builder_lvl1_synth_output_for_analysis.csv'
 
 
 with open(json_path, 'r') as j:
@@ -35,9 +39,11 @@ for sample in samples:
     row = []
     shape = sample['shape'] 
     
-    #print(sample['index'])
+    print(sample['index'])
+    print(shape)
     
     if sample['net_seq'] == None:
+        print('botched')
         row.append(shape + '_botched')
         row.extend([0, 0, 0, 0, 0])
     else:

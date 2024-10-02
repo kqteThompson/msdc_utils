@@ -25,6 +25,8 @@ def get_links(sample_string, sample_index):
    
     rel_list = []
     attach_list = []
+    bad = 0
+    good = 0
     for a in split_list:
         s_tuple = None
         rel = None
@@ -48,6 +50,9 @@ def get_links(sample_string, sample_index):
         # if rel != None and s_tuple != None:
             attach_list.append((int(s[0]), int(s[1])))
             rel_list.append(r)
+            good += 1
+        else:
+            bad += 1
     
     #re-construct the full list 
     #a list of tuples (rel, x, y)
@@ -58,7 +63,7 @@ def get_links(sample_string, sample_index):
         if r not in endpoints:
             endpoints.append(r)
             full_list.append((rel_list[i], r[0], r[1]))   
-    return endpoints, full_list
+    return endpoints, full_list, [good, bad]
     
 #MINECRAFT LABELS
 # labels = ['COM','CONTR','CORR','QAP','ACK','ELAB','CLARIFQ','COND','CONTIN',
@@ -67,8 +72,8 @@ def get_links(sample_string, sample_index):
 
 current_folder=os.getcwd()
 
-gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
-pred_path = current_folder + '/msdc_llama/llamipa_3.1_test_output_gold_struct.txt'
+# gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
+# pred_path = current_folder + '/msdc_llama/llamipa_3.1_test_output_gold_struct.txt'
 # pred_path = current_folder + '/msdc_llama/llamipa_3.1_test_output_pred_struct.txt'
 
 # gold_path = current_folder + '/ablation/parser_val_moves_full.jsonl'
@@ -95,9 +100,9 @@ pred_path = current_folder + '/msdc_llama/llamipa_3.1_test_output_gold_struct.tx
 # gold_path = current_folder + '/msdc_llama/parser_test_moves_15_nostructure.jsonl'
 # pred_path = current_folder + '/msdc_llama/test-output-file-nostruct.txt'
 
-# gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
+gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
 # pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
-# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
+pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
 # pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-randomize.txt'
 #pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-randomize-attach.txt'
 
@@ -155,10 +160,19 @@ fn_distances = defaultdict(list)
 
 doubles = 0
 
+bad_output = 0
+good_output = 0
+
 for i, s in enumerate(pred_outputs):
     #first do attachments
-    pred_att, pred_all = get_links(s, i)
-    gold_att, gold_all = get_links(gold_outputs[i], i)
+    # pred_att, pred_all = get_links(s, i)
+    # gold_att, gold_all = get_links(gold_outputs[i], i)
+
+    pred_att, pred_all, malform = get_links(s, i)
+    gold_att, gold_all, malform = get_links(gold_outputs[i], i)
+
+    bad_output += malform[1]
+    good_output += malform[0]
 
     # print("GOLD:", gold_all)
     # print("PRED:", pred_all)

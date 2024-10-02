@@ -22,8 +22,12 @@ current_folder=os.getcwd()
 # save_path = current_folder + '/llama_aug_synth_function_output.json'
 
 #Nebula + Fine tuning #2
-output_path = current_folder + '/llama_3_aug_synthdata_level1_v2.csv'
-save_path = current_folder + '/llama_aug_synth_function_output_v2.json'
+# output_path = current_folder + '/llama_3_aug_synthdata_level1_v2.csv'
+# save_path = current_folder + '/llama_aug_synth_function_output_v2.json'
+
+#neural builder test
+output_path = '/home/kate/minecraft_utils/synthetic/neural_builder/neural_builder_lvl1_pred.csv'
+save_path = current_folder + '/neural_builder_lvl1_synth_function_output.json'
 
 #Nebula + 
 
@@ -70,14 +74,20 @@ def get_params(instruction):
     
     num = re.compile(r'\d+').findall(instruction)
     twod = re.compile(r'\d+x\d+').findall(instruction)
+    twodspace = re.compile(r'\d+\sx\s\d+').findall(instruction)
     threed = re.compile(r'\d+x\d+x\d+').findall(instruction)
+    threedspace = re.compile(r'\d+\sx\s\d+\sx\s\d+').findall(instruction)
 
     if len(num) == 1:
         params['size'] = [int(num[0])]
     elif len(threed) == 1:
         params['size'] = [int(t) for t in threed[0].split('x')]
+    elif len(threedspace) == 1:
+        params['size'] = [int(t.strip()) for t in threedspace[0].split('x')]
     elif len(twod) == 1:
-        params['size'] = [int(t) for t in twod[0].split('x')]
+        params['size'] = [int(t.strip()) for t in twod[0].split('x')]
+    elif len(twodspace) == 1:
+        params['size'] = [int(t.strip()) for t in twodspace[0].split('x')]
 
     if axes:
         #make sure the size is the side!
@@ -102,8 +112,8 @@ for line in data[1:]:
     func_obj['raw output'] = moves
     param_dict = get_params(instr)
     func_obj['shape'] = param_dict['shape']
-    print(ind)
-    print(param_dict['shape'])
+    #print(ind)
+    #print(param_dict['shape'])
     if len(moves) == 0:
         func_obj['net_seq'] = None
     else:
@@ -176,6 +186,7 @@ for line in data[1:]:
             func_obj['center'] = fn.get_center_quads(seq, 'square')
         '-------------------------------------------------------RECTANGLE'
         if param_dict['shape'] == 'rectangle':
+            #print(param_dict['size'])
             check = fn.is_rectangle_unfilled(seq)
             if check:
                 func_obj['shape_check'] = check[0]
