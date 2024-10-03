@@ -72,6 +72,12 @@ def get_links(sample_string, sample_index):
 
 current_folder=os.getcwd()
 
+gold_path = current_folder + '/synthetic/synthetic_corrections_LONG_GEN_test.jsonl'
+pred_path = current_folder + '/synthetic/synth_correction_LONG_GEN_test.txt'
+
+# gold_path = current_folder + '/synthetic/synthetic_corrections_SHORT_GEN_test.jsonl'
+# pred_path = current_folder + '/synthetic/synth_correction_SHORT_GEN_test.txt'
+
 # gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
 # pred_path = current_folder + '/msdc_llama/llamipa_3.1_test_output_gold_struct.txt'
 # pred_path = current_folder + '/msdc_llama/llamipa_3.1_test_output_pred_struct.txt'
@@ -100,9 +106,9 @@ current_folder=os.getcwd()
 # gold_path = current_folder + '/msdc_llama/parser_test_moves_15_nostructure.jsonl'
 # pred_path = current_folder + '/msdc_llama/test-output-file-nostruct.txt'
 
-gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
+# gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
 # pred_path = current_folder + '/msdc_llama/test-output-ll3.txt'
-pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
+# pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3.txt'
 # pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-randomize.txt'
 #pred_path = current_folder + '/msdc_llama/test-output-generate-file-llama3-randomize-attach.txt'
 
@@ -288,7 +294,7 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/score_outputs/scores_llama3.1_goldstruct_test.txt","w")
+f = open(current_folder + "/score_outputs/scores_synthetic_corrections_LONG_GEN_test.txt","w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)
