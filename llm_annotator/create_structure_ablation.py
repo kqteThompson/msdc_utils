@@ -7,8 +7,8 @@ import jsonlines
 current_folder=os.getcwd()
 
 
-data_path = current_folder + '/parser_stac_test_15.jsonl'
-ablation_path = current_folder + '/parser_stac_test_15_nostructure.jsonl'
+data_path = '/home/kate/minecraft_utils/parsing_scores/synthetic/synthetic_corrections_LONG_GEN_test.jsonl'
+ablation_path = '/home/kate/minecraft_utils/parsing_scores/synthetic/synthetic_corrections_long_test_nostructure.jsonl'
 
 ablation = []
 

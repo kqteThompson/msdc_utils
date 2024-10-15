@@ -72,8 +72,24 @@ def get_links(sample_string, sample_index):
 
 current_folder=os.getcwd()
 
-gold_path = current_folder + '/synthetic/synthetic_corrections_LONG_GEN_test.jsonl'
-pred_path = current_folder + '/synthetic/synth_correction_LONG_GEN_test.txt'
+# gold_path = current_folder + '/msdc_llama/parser_test_moves_15_nostructure.jsonl'
+# pred_path = current_folder + '/synthetic/test-output-file-msdc-structless.txt'
+# save_results = current_folder + '/score_outputs/scores_MSCD_structureless.txt'
+
+gold_path = current_folder + '/synthetic/synthetic_corrections_long_test_nostructure.jsonl'
+pred_path = current_folder + '/synthetic/test-output-LONGGEN-nostruct-amended.txt'
+save_results = current_folder + '/score_outputs/scores_LONG_structureless.txt'
+
+# gold_path = current_folder + '/merged_adapters/parser_test_moves_15.jsonl'
+# pred_path = current_folder + '/merged_adapters/parser_test_moves_15_output.txt'
+# save_results = current_folder + '/score_outputs/scores_MSCD_test_dare_linear_5.txt'
+
+# gold_path = current_folder + '/synthetic/synthetic_corrections_LONG_GEN_test.jsonl'
+# pred_path = current_folder + '/synthetic/nebulipa_outputs/dare_linear_0.6,0.4/synth_correction_LONG_GEN_NBLPAtest.txt'
+# save_results = current_folder + '/score_outputs/scores_LONG_GEN_NBLPAtest_dare_linear_6.txt'
+
+# gold_path = current_folder + '/synthetic/synthetic_corrections_LONG_GEN_test.jsonl'
+# pred_path = current_folder + '/synthetic/synth_correction_LONG_GEN_test.txt'
 
 # gold_path = current_folder + '/synthetic/synthetic_corrections_SHORT_GEN_test.jsonl'
 # pred_path = current_folder + '/synthetic/synth_correction_SHORT_GEN_test.txt'
@@ -130,10 +146,24 @@ with open(pred_path, 'r') as txt:
 
 pred_outputs = []
 
+# for t in text:
+#     if '### DS:' in t:
+#         #print(t)
+#         sample = t.split('### DS:')[1].strip()
+#         pred_outputs.append(sample)
+
+##new way to get predicted outputs:
+in_new_sample = 0
 for t in text:
-    if '### DS:' in t:
+    if '<|begin_of_text|>' in t:
+        in_new_sample = 1
+        #start looking for '### DS:'
+    if '### DS:' in t and in_new_sample == 1:
         sample = t.split('### DS:')[1].strip()
         pred_outputs.append(sample)
+        in_new_sample = 0
+
+print(len(pred_outputs))
 
 #get gold sample list
 gold_outputs = []
@@ -173,6 +203,10 @@ for i, s in enumerate(pred_outputs):
     #first do attachments
     # pred_att, pred_all = get_links(s, i)
     # gold_att, gold_all = get_links(gold_outputs[i], i)
+    print(i)
+    print(s)
+    print(gold_outputs[i])
+    print('--------------------')
 
     pred_att, pred_all, malform = get_links(s, i)
     gold_att, gold_all, malform = get_links(gold_outputs[i], i)
@@ -180,9 +214,9 @@ for i, s in enumerate(pred_outputs):
     bad_output += malform[1]
     good_output += malform[0]
 
-    # print("GOLD:", gold_all)
-    # print("PRED:", pred_all)
-    # print('-------')
+    print("GOLD:", gold_all)
+    print("PRED:", pred_all)
+    print('-------')
 
     # if len(set(gold_att)) < len(gold_att):
     #     print('!! multiple relations')
@@ -294,7 +328,8 @@ pred_list = [labels.index(m[1]) for m in matrix_list]
 # gold_list = [m[0] for m in matrix_list]
 # pred_list = [m[1] for m in matrix_list]
 
-f = open(current_folder + "/score_outputs/scores_synthetic_corrections_LONG_GEN_test.txt","w")
+# f = open(current_folder + "/score_outputs/scores_synthetic_corrections_LONG_GEN_NBLPAtest.txt","w")
+f = open(save_results,"w")
 print("Attachment F1:",np.mean(att_f1_l),len(att_f1_l), file=f)
 print("Attachment Average Precision:",np.mean(att_prec_l), file=f)
 print("Attachment Average Recall:",np.mean(att_rec_l), file=f)
