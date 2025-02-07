@@ -24,9 +24,12 @@ current_folder=os.getcwd()
 # save_path = current_folder + '/llama_aug_synth_level_one_output_for_analysis_v2.csv'
 
 #Neural builder
-json_path = current_folder + '/neural_builder_lvl1_synth_function_output.json'
-save_path = current_folder + '/neural_builder_lvl1_synth_output_for_analysis.csv'
+# json_path = current_folder + '/neural_builder_lvl1_synth_function_output.json'
+# save_path = current_folder + '/neural_builder_lvl1_synth_output_for_analysis.csv'
 
+#Nebula + Narative arcs 
+json_path = current_folder + '/lvl1_synth_narr_emnlp_function_output.json'
+save_path = current_folder + '/lvl1_synth_narr_emnlp_synth_output_for_analysis.csv'
 
 with open(json_path, 'r') as j:
     jfile = json.load(j)

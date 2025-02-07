@@ -26,10 +26,12 @@ current_folder=os.getcwd()
 # save_path = current_folder + '/llama_aug_synth_function_output_v2.json'
 
 #neural builder test
-output_path = '/home/kate/minecraft_utils/synthetic/neural_builder/neural_builder_lvl1_pred.csv'
-save_path = current_folder + '/neural_builder_lvl1_synth_function_output.json'
+# output_path = '/home/kate/minecraft_utils/synthetic/neural_builder/neural_builder_lvl1_pred.csv'
+# save_path = current_folder + '/neural_builder_lvl1_synth_function_output.json'
 
-#Nebula + 
+#Nebula + Narative arcs 
+output_path = '/home/kate/minecraft_utils/synthetic/level_one/lvl1_synth_narr_pred_emnlp.csv'
+save_path = current_folder + '/lvl1_synth_narr_emnlp_function_output.json'
 
 def get_moves(line):
     """
