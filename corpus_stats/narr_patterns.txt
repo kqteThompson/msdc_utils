@@ -1,0 +1,780 @@
+X 1193
+Arch -- Sys -- Arch
+                       
+-----------------------
+X 215
+Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 106
+Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 83
+Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 51
+Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 47
+Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 34
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 28
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 27
+Arch
+                       
+-----------------------
+X 21
+Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 19
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 18
+Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 18
+Arch -- Buil -- Arch
+                       
+-----------------------
+X 17
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 15
+Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 15
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 14
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 13
+Arch -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 11
+Arch -- Buil -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 11
+Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 8
+Arch -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 8
+Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 7
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 7
+Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 5
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 5
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 5
+Arch -- Buil -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 5
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 4
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 4
+Arch -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 4
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 4
+Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 3
+Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 3
+Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 3
+Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 3
+Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 3
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Buil
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Buil -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 2
+Sys -- Arch -- Sys
+                       
+-----------------------
+X 2
+Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 2
+Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 2
+Arch -- Sys
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil
+                       
+-----------------------
+X 1
+Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Buil
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Buil -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Buil
+                       
+-----------------------
+X 1
+Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys
+                       
+-----------------------
+X 1
+Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys
+                       
+-----------------------
+X 1
+Sys -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Arch -- Buil -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Sys -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Sys -- Buil -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch -- Sys -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Sys -- Arch -- Buil -- Arch
+                       
+-----------------------
+X 1
+Arch -- Sys -- Buil -- Arch -- Sys -- Buil -- Arch -- Buil -- Arch -- Buil -- Arch -- Sys -- Buil -- Arch
+                       
+-----------------------

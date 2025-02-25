@@ -1,0 +1,339 @@
+29 games out of 130 have no corrections.
+
+
+C2-B1-A3 : 1 corrections   
+            L-L : Architect corrects spelling
+C151-B44-A42 : 1 corrections
+            NL-NL : V4
+C145-B35-A15 : 1 corrections
+            L-L : Architect corrects spelling
+C25-B1-A44 : 1 corrections
+            L-L : V1
+C35-B29-A26 : 1 corrections
+            L-L : V1
+C2-B25-A51 : 2 corrections
+            Triangle : V3
+C25-B36-A38 : 2 corrections
+            Triangle : V3
+C94-B16-A26 : 2 corrections
+            Triangle : V3
+C103-B52-A27 : 2 corrections
+            Triangle : V3
+            Triangle : V3
+C37-B15-A27 : 2 corrections 
+            Triangle : V2
+C16-B24-A25 : 2 corrections
+            Triangle : V3
+C148-B54-A1 : 2 corrections
+            Triangle : V3
+C37-B25-A51 : 2 corrections
+            Triangle : V3
+C85-B20-A30 : 2 corrections
+            Triangle : V3
+C14-B29-A8 : 2 corrections
+            Triangle : V3
+C25-B24-A25 : 2 corrections
+            Triangle : V3''
+C103-B49-A39 : 2 corrections
+            Triangle : V3
+C102-B29-A34 : 2 corrections
+            Triangle: V3
+C16-B3-A16 : 2 corrections
+            Triangle : V3
+C25-B31-A41 : 2 corrections
+            Triangle : V3
+C16-B1-A44 : 2 corrections
+            Triangle : V3 
+C37-B34-A38 : 2 corrections
+            Triangle : V3 
+C14-B3-A2 : 2 corrections
+            Triangle : V3
+C69-B19-A36 : 2 corrections
+            L-L : V1
+            L-L : Architect corrects spelling
+C33-B37-A46 : 2 corrections
+            Triangle : V3 
+C79-B49-A39 : 2 corrections
+            Triangle : V2
+C12-B3-A2 : 2 corrections
+            Triangle : V3
+C148-B36-A25 : 2 corrections
+            Triangle : V3
+C23-B47-A30 : 2 corrections
+            Triangle : V3
+C79-B42-A12 : 2 corrections
+            Triangle : V3
+C1-B1-A3 : 2 corrections
+            Triangle : V2
+C66-B44-A20 : 2 corrections
+            Triangle : V3
+C12-B15-A38 : 3 corrections
+            Triangle: V3
+            L-L : Builder corrects spelling
+C35-B44-A20 : 3 corrections
+            L-L : Architect corrects spelling
+            Triangle : V3
+C6-B20-A10 : 3 corrections
+            Triangle : V3
+            L-L : Architect corrects spelling
+C94-B35-A44 : 3 corrections
+            Triangle: V3 
+            L-L : Builder corrects spelling
+C99-B35-A44 : 3 corrections
+            L-L : V1
+            Triangle : V3
+C4-B4-A19 : 4 corrections
+            Triangle : V2
+            Triangle : V3
+C54-B13-A30 : 4 corrections
+            Triangle : V3
+            Triangle : V3
+C99-B53-A4 : 4 corrections
+            Triangle : V3
+            Triangle : V3'
+C23-B3-A2 : 4 corrections
+            Triangle : V3
+            Triangle : V4
+C148-B42-A4 : 4 corrections
+            2 chained Triangles : V3
+C144-B53-A4 : 4 corrections
+            Triangle : V3
+            Triangle : V2
+C150-B54-A1 : 4 corrections
+            Triangle : V3
+            Triangle : V3
+C4-B29-A8 : 4 corrections
+            L-L : Architect corrects spelling
+            Triangle : V2
+            L-L : Architect corrects spelling
+C66-B42-A4 : 4 corrections
+            Triangle : V3
+            Triangle : V3 
+C145-B54-A1 : 4 corrections
+            Triangle : V3''
+            Triangle : V3
+C69-B29-A26 : 4 corrections
+            Triangle : V3
+            Triangle : V3
+C20-B1-A44 : 4 corrections
+            Triangle : V2
+            Triangle : V3
+C23-B20-A30 : 4 corrections
+            Triangle : V3 
+            Traingle : V3
+C85-B25-A10 : 4 corrections
+            Triangle : V3 
+            Triangle : V3
+C35-B25-A51 : 4 corrections
+            2 chained Triangles : V3
+C4-B1-A3 : 4 corrections
+            Triangle : V3 
+            Triangle : V3
+C99-B27-A25 : 4 corrections
+            Triangle : V3
+            Triangle : V3
+C102-B16-A1 : 4 corrections
+            Triangle : V2
+            Triangle : V2 
+C118-B44-A15 : 4 corrections
+            Triangle : V3
+            Triangle : V2 
+C150-B42-A4 : 4 corrections
+            Triangle : V3
+            Triangle : V3
+C11-B15-A38 : 4 corrections
+            Triangle : V3
+            Triangle : V3
+C142-B44-A42 : 5 corrections
+            Triangle : V3 
+            Triangle : V3
+            L-L : builder corrects spelling
+C89-B34-A31 : 5 corrections
+            Triangle : V3
+            Triangle : [B] Builder decided to change his own move.
+            L-L : builder corrects spelling
+C69-B11-A7 : 5 corrections
+            L-L : V1
+            Triangle : V3
+            Triangle : V2
+C6-B1-A3 : 5 corrections
+            L-L : V1
+            Triangle : V3
+            Triangle : V3 
+C2-B20-A10 : 5 corrections
+            Triangle : V3
+            Triangle : V3
+            L-L : architect corrects spelling
+C62-B29-A26 : 5 corrections
+            Triangle : V3
+            L-L : architect corrects spelling
+            Triangle : V3
+C48-B1-A44 : 6 corrections
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+C33-B47-A30 : 6 corrections
+            2 chained Triangles : V3
+            Triangle : V3
+C94-B27-A25 : 6 corrections
+            Triangle : V3
+            Triangle : V2
+            Triangle : V3
+C28-B1-A4 : 6 corrections
+            3 chained Triangles : V3      
+C153-B44-A42 : 6 corrections
+            Triangle : V3 
+            Triangle : V3 
+            Triangle : V3
+C128-B35-A34 : 6 corrections
+            Triangle : V3 
+            Triangle : V4
+            Triangle : V3 
+C89-B35-A44 : 6 corrections
+            2 chained Triangles : V3
+            Triangle : V3
+C11-B12-A26 : 6 corrections
+            Triangle : V3
+            2 chained Triangles : V3
+C118-B19-A36 : 6 corrections
+            Triangle : V2
+            Triangle : V3
+            Triangle : V3 
+C153-B34-A38 : 6 corrections
+            Triangle : 
+            Triangle : 
+            Triangle :
+C66-B36-A38 : 6 corrections
+            Triangle : 
+            Triangle : 
+            Triangle :
+C150-B29-A34 : 7 corrections
+            L-L : V1
+            L-L : V1
+            L-L : V1
+            Triangle : V2
+            Triangle : V3
+C6-B12-A26 : 7 corrections
+            2 chained Triangles : V3 
+            L-L : V1
+            Triangle : V3
+C99-B29-A34 : 7 corrections
+            2 chained Triangles : V3 
+            L-L : V1
+            Triangle : V3
+C1-B29-A8 : 7 corrections
+            L-L : V1
+            Triangle : V3
+            2 chained Triangle : V3
+C36-B16-A41 : 8 corrections
+            Triangle : V2* [but it's about the whole structure up to then...so can't annotate this]
+            2 chained Triangles : V3 
+            Triangle : V3' [for whole second half of structure]
+C23-B38-A28 : 8 corrections
+            Triangle : V3
+            Traingle : V3 
+            2 chained Triangles : V3 - V4
+C128-B44-A15 : 8 corrections
+            Triangle : V3
+            Triangle : V3
+            2 chained Triangles : V3 - V2
+C102-B52-A27 : 8 corrections
+            3 chained Triangles : V3
+            Triangle : V2
+C54-B1-A4 : 8 corrections
+            2 chained Triangle : V3
+            L-L : Builder corrects his question
+            Triangle : V4
+            Triangle : V3
+C36-B47-A30 : 8 corrections
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+C20-B24-A25 : 8 corrections
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+C36-B1-A4 : 8 corrections
+            Triangle : V3
+            3 chained Triangles : V3
+C153-B35-A55 : 9 corrections
+            3 chained Triangles :V3
+            double Triangle : V3
+C1-B35-A55 : 9 corrections
+            Triangle : V3
+            2 chained Triangle : V3
+            2 chained Triangle : V3
+C118-B35-A34 : 9 corrections
+            L-L : Architect spelling correction
+            Triangle : V3
+            L-L : Architect spelling correction
+            Triangle : V3
+            L-L : Architect spelling correction 
+            Triangle : V2 -- architect changes mind about plan...goes into new narrative arc
+C66-B21-A15 : 9 corrections
+            Triangle : V2
+            2 chained Triangle : V3
+            L-L : architect spelling correction 
+            Triangle : V3
+C1-B35-A55 : 9 corrections
+            Triangle : V3
+            2 chained Triangle : V3
+            2 chained Triangle : V3
+C79-B25-A3 : 10 corrections
+            Triangle : V3
+            Triangle : V3
+            Triangle : V2
+            Triangle : V3
+            Triangle : V3
+C128-B27-A1 : 10 corrections
+            2 chained Triangles : V3 -- architect sees builder not getting it...goes into new narrative arc
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+C145-B16-A26 : 10 corrections
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+            L-L : Builder corrects spelling
+            Triangle : V3
+            L-L : V1
+C33-B35-A55 : 10 corrections
+            Triangle : V3
+            Triangle : V3 -- another ex of a correction then architect starts w positive explanations
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+C156-B1-A4 : 12 corrections
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3
+            2 chained Triangles : V3
+            Triangle : V3
+C144-B54-A1 : 12 corrections
+            Triangle : V3 (V2* -- architect didn't specify something he should have)
+            Triangle : V3
+            Triangle : V3
+            Triangle : V3 (architect is being very lazy)
+            2 chained Triangle : V3
+C20-B3-A16 : 13 corrections
+            2 chained Triangles : V2
+            L-L : V1
+            2 chained Triangles : V3
+            Triangle : V3
+            Triangle : V3
+C142-B36-A35 : 14 corrections
+            Triangle : V3 (V2* really because architect didn't specify something he should have)
+            Triangle : V3
+            L-L : V1
+            L-L : V1 (NB: this is about the builder moving his avatar)
+            2 chained Triangles : V3
+            2 chained Triangles : V3
+C144-B16-A29 : 17 corrections
+            2 chained Triangles : V3
+            L-L : architect corrects spelling
+            2 chained Triangles : V3
+            2 chained Triangles : V3
+            2 chained Triangles : V3
+          

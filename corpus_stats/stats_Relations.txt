@@ -1,0 +1,26 @@
+Forward Relations
+                                         
+                        Total     1     2    3    4    5    6    7    8    9   10  num over  max
+Elaboration              4076  3621   345   69   15    9   10    3    2    0    0         2   13
+Acknowledgement          4550  3526   820  134   37   14   11    4    2    1    0         1   13
+Continuation             2029  1366   318  176   95   38   22    7    2    4    1         0   10
+Contrast                  398   367    17    8    5    1    0    0    0    0    0         0    5
+Correction               2162   529   565  460  295  143   78   41   23    7    9        12   20
+Result                  10418  8834  1089  295  115   43   25    8    6    1    1         1   12
+Comment                  1676  1432   181   50   10    2    0    0    0    1    0         0    9
+Question-answer_pair     1933  1522   289   84   26    8    3    1    0    0    0         0    7
+Narration                4455   155   980  874  577  419  335  264  159  143  124       425   63
+Clarification_question    960   611   256   50   19   12    3    3    1    1    2         2   14
+Confirmation_question     999   885    85   22    6    1    0    0    0    0    0         0    5
+Q-Elab                    229   150    62   14    3    0    0    0    0    0    0         0    4
+Explanation               108    98     8    1    1    0    0    0    0    0    0         0    4
+Alternation               173   162     9    1    0    0    1    0    0    0    0         0    6
+Conditional                67    58     5    2    2    0    0    0    0    0    0         0    4
+Sequence                   38    19    14    2    1    1    1    0    0    0    0         0    6
+                                          
+Backwards Relations
+                                         
+             Total    1  2  3  4  5  6  7  8  9  10  num over  max
+Comment        242  238  4  0  0  0  0  0  0  0   0         0    2
+Conditional     16   16  0  0  0  0  0  0  0  0   0         0    1
+                                          
