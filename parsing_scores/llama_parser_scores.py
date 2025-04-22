@@ -72,13 +72,32 @@ def get_links(sample_string, sample_index):
 
 current_folder=os.getcwd()
 
+#this is for the ablation using the window change + gold structure -- to see if indexes affected outputs 
+# gold_path = '/home/kate/minecraft_utils/synthetic/corrections/synthetic_corrections_long_FREEZE_ablation.jsonl'
+# pred_path = '/home/kate/minecraft_utils/synthetic/corrections/synthetic_corrections_long_FREEZE_ablation_pred.txt'
+# save_results = '/home/kate/minecraft_utils/parsing_scores/synthetic/long_index_ablation.txt'
+
+#this is the french version of the synthcorr data using gold structure
+gold_path = '/home/kate/minecraft_utils/synthetic/french_corrections/french_synthetic_corrections_short_test.jsonl'
+pred_path = '/home/kate/minecraft_utils/synthetic/french_corrections/french_synthetic_corrections_short_pred.txt'
+save_results = '/home/kate/minecraft_utils/parsing_scores/synthetic/french_corrections_short.txt'
+
+
+# gold_path = current_folder + '/msdc_llama/parser_test_moves_15.jsonl'
+# pred_path = '/home/kate/minecraft_utils/turpan_checks/turpan_llamipa_test_output_pred_struct.txt'
+# save_results = '/home/kate/minecraft_utils/turpan_checks/llamipa_test_scores.txt'
+
+# gold_path = current_folder + '/msdc_llama/parser_val_moves_15.jsonl'
+# pred_path = '/home/kate/minecraft_utils/turpan_checks/turpan_llamipa_val_output_pred_struct.txt'
+# save_results = '/home/kate/minecraft_utils/turpan_checks/llamipa_val_scores.txt'
+
 # gold_path = current_folder + '/msdc_llama/parser_test_moves_15_nostructure.jsonl'
 # pred_path = current_folder + '/synthetic/test-output-file-msdc-structless.txt'
 # save_results = current_folder + '/score_outputs/scores_MSCD_structureless.txt'
 
-gold_path = current_folder + '/synthetic/synthetic_corrections_long_test_nostructure.jsonl'
-pred_path = current_folder + '/synthetic/test-output-LONGGEN-nostruct-amended.txt'
-save_results = current_folder + '/score_outputs/scores_LONG_structureless.txt'
+# gold_path = current_folder + '/synthetic/synthetic_corrections_long_test_nostructure.jsonl'
+# pred_path = current_folder + '/synthetic/test-output-LONGGEN-nostruct-amended.txt'
+# save_results = current_folder + '/score_outputs/scores_LONG_structureless.txt'
 
 # gold_path = current_folder + '/merged_adapters/parser_test_moves_15.jsonl'
 # pred_path = current_folder + '/merged_adapters/parser_test_moves_15_output.txt'
@@ -312,7 +331,7 @@ pred = [m[1] for m in matrix_list]
 # print(set(pred))
 gold.extend(pred)
 labels = list(set(gold))
-print(labels)
+#print(labels)
 
 
 # labels = ['COM', 'CONT', 'CORR', 'QAP', 'PAR', 'ACK',

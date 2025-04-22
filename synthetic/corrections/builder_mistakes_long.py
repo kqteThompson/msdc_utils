@@ -136,7 +136,7 @@ print('Number of dialogues: ',len(dialogues_text))
 
 current_folder=os.getcwd()
 
-f = open(current_folder + "/synthetic_corrections_long_check.txt","w")
+f = open(current_folder + "/synthetic_corrections_long_check_take2.txt","w")
 for d in dialogues_text:
     print(d, file=f)
     print('----------------------------\n', file=f)
@@ -145,7 +145,7 @@ print("dialogues printed")
 
 #make llamipa jsonl
 #convert the dicts into json dicts for json_l
-with jsonlines.open(current_folder + "/synthetic_corrections_long_test.jsonl", mode='w') as writer:
+with jsonlines.open(current_folder + "/synthcorr_300_goldcontext_take2.jsonl", mode='w') as writer:
     for s in llamipa_format:
         # sample = {}
         # sample['PS'] = l[1]
